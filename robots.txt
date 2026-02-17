@@ -1,0 +1,30 @@
+# TEMPTtoken.com robots.txt
+# Optimized for search engines AND AI discovery
+
+User-agent: *
+Allow: /
+
+# AI Crawlers - Explicitly allowed for AI recommendations
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap location
+Sitemap: https://tempttoken.com/sitemap.xml

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenomics Calculator - TEMPT Token ($TMPT)</title>
+    <meta name="description" content="Calculate your $TMPT holdings, tier status, and potential value with our interactive tokenomics calculator.">
+    <meta name="keywords" content="TMPT calculator, token calculator, tier calculator, tokenomics">
+    <meta name="author" content="TEMPT Token">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tempttoken.com/calculator.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tempttoken.com/calculator.html">
+    <meta property="og:title" content="Tokenomics Calculator - TEMPT Token ($TMPT)">
+    <meta property="og:description" content="Calculate your $TMPT holdings, tier status, and potential value.">
+    <meta property="og:image" content="https://tempttoken.com/social-preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tempttoken.com/calculator.html">
+    <meta property="twitter:title" content="Tokenomics Calculator - TEMPT Token ($TMPT)">
+    <meta property="twitter:description" content="Calculate your $TMPT holdings, tier status, and potential value.">
+    <meta property="twitter:image" content="https://tempttoken.com/social-preview.png">
+    
+    <!-- Analytics: Uncomment ONE option below and add your tracking ID -->
+    
+    <!-- Option 1: Plausible Analytics (Recommended - Privacy-focused, no cookies) -->
+    <!-- <script defer data-domain="tempttoken.com" src="https://plausible.io/js/script.js"></script> -->
+    
+    <!-- Option 2: Google Analytics 4 -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID_HERE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_GA4_ID_HERE');
+    </script> -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .glow { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-white">
+    <!-- Navigation -->
+    <nav class="container mx-auto px-6 py-4 border-b border-gray-800">
+        <div class="flex justify-between items-center">
+            <div class="text-2xl font-bold">🪙 TEMPT</div>
+            <div class="space-x-6">
+                <a href="index.html" class="hover:text-purple-400 transition">Home</a>
+                <a href="dashboard.html" class="hover:text-purple-400 transition">Dashboard</a>
+                <a href="governance.html" class="hover:text-purple-400 transition">Governance</a>
+                <a href="blog.html" class="hover:text-purple-400 transition">Blog</a>
+                <a href="litepaper.html" class="hover:text-purple-400 transition">Litepaper</a>
+                <a href="faq.html" class="hover:text-purple-400 transition">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="container mx-auto px-6 py-12 text-center">
+        <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Tokenomics Calculator
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+            Calculate your potential $TMPT holdings, access tier, and estimated value
+        </p>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="container mx-auto px-6 pb-20 max-w-6xl">
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Input Panel -->
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800">
+                <h2 class="text-2xl font-bold mb-6">Enter Your Investment</h2>
+                
+                <!-- Token Amount Input -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-400 mb-2">Number of $TMPT Tokens</label>
+                    <input 
+                        type="number" 
+                        id="tokenAmount" 
+                        placeholder="0"
+                        class="w-full px-6 py-4 rounded-lg bg-gray-800 border border-gray-700 focus:border-purple-500 focus:outline-none text-2xl font-bold text-white"
+                        oninput="calculate()"
+                    />
+                    <p class="text-sm text-gray-500 mt-2">Minimum: 1 token</p>
+                </div>
+
+                <!-- Price Input -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-400 mb-2">Estimated Token Price (USD)</label>
+                    <div class="relative">
+                        <span class="absolute left-6 top-4 text-2xl font-bold text-gray-500">$</span>
+                        <input 
+                            type="number" 
+                            id="tokenPrice" 
+                            placeholder="0.00"
+                            step="0.01"
+                            value="0.10"
+                            class="w-full pl-12 pr-6 py-4 rounded-lg bg-gray-800 border border-gray-700 focus:border-purple-500 focus:outline-none text-2xl font-bold text-white"
+                            oninput="calculate()"
+                        />
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Current estimate (pre-launch)</p>
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-400 mb-3">Quick Presets</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="setAmount(1000)" class="px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition font-semibold">
+                            1K
+                        </button>
+                        <button onclick="setAmount(10000)" class="px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition font-semibold">
+                            10K
+                        </button>
+                        <button onclick="setAmount(50000)" class="px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition font-semibold">
+                            50K
+                        </button>
+                        <button onclick="setAmount(100000)" class="px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition font-semibold">
+                            100K
+                        </button>
+                        <button onclick="setAmount(500000)" class="px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition font-semibold">
+                            500K
+                        </button>
+                        <button onclick="setAmount(1000000)" class="px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition font-semibold">
+                            1M
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <button onclick="reset()" class="w-full px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition font-semibold">
+                    Reset Calculator
+                </button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="space-y-6">
+                <!-- Total Value -->
+                <div class="bg-gradient-to-r from-purple-900/40 to-pink-900/40 p-8 rounded-xl border border-purple-500/30">
+                    <div class="text-sm font-semibold text-gray-400 mb-2">Total Value (USD)</div>
+                    <div class="text-5xl font-bold text-white" id="totalValue">$0.00</div>
+                </div>
+
+                <!-- Access Tier -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-800" id="tierCard">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-sm font-semibold text-gray-400">Your Access Tier</div>
+                        <div class="text-3xl" id="tierEmoji">🔒</div>
+                    </div>
+                    <div class="text-3xl font-bold mb-2" id="tierName">No Tier</div>
+                    <p class="text-gray-400 mb-4" id="tierDescription">Enter token amount to see your tier</p>
+                    <div class="bg-gray-800 rounded-lg p-4">
+                        <div class="text-xs font-semibold text-gray-500 mb-2">TIER BENEFITS</div>
+                        <ul class="space-y-2 text-sm" id="tierBenefits">
+                            <li class="text-gray-500">• No benefits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tier Progress -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-800">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="text-sm font-semibold text-gray-400">Progress to Next Tier</div>
+                        <div class="text-sm font-bold" id="progressPercent">0%</div>
+                    </div>
+                    <div class="w-full bg-gray-800 rounded-full h-3 mb-4">
+                        <div class="gradient-bg h-3 rounded-full transition-all duration-500" id="progressBar" style="width: 0%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400" id="progressText">Enter amount to see progress</p>
+                </div>
+
+                <!-- Tier Reference -->
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <div class="text-sm font-semibold text-gray-400 mb-4">Tier Requirements</div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <span>🥉</span>
+                                <span class="font-semibold">Basic</span>
+                            </div>
+                            <span class="text-gray-400">1 - 9,999 tokens</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <span>🥈</span>
+                                <span class="font-semibold">Silver</span>
+                            </div>
+                            <span class="text-gray-400">10,000 - 99,999 tokens</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <span>🥇</span>
+                                <span class="font-semibold">Gold</span>
+                            </div>
+                            <span class="text-gray-400">100,000+ tokens</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="mt-12 bg-yellow-900/20 border border-yellow-800 rounded-xl p-6 text-center">
+            <p class="text-sm text-yellow-200">
+                ⚠️ <strong>Disclaimer:</strong> This calculator is for educational purposes only. Token prices are estimates and may not reflect actual market value. Cryptocurrency investments carry risk. This is not financial advice. DYOR (Do Your Own Research).
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-12 border-t border-gray-800 text-center text-gray-500">
+        <p class="mb-4">TEMPT Token ($TMPT) - Built on transparency, driven by utility</p>
+        <p class="text-sm">⚠️ Disclaimer: Cryptocurrency investments carry risk. This is not financial advice. DYOR.</p>
+    </footer>
+
+    <script>
+        // Tier definitions
+        const tiers = {
+            basic: {
+                name: 'Basic Tier',
+                emoji: '🥉',
+                min: 1,
+                max: 9999,
+                color: 'border-yellow-600',
+                benefits: [
+                    '• Standard transaction fees',
+                    '• Access to public governance proposals',
+                    '• Community forum access',
+                    '• Basic holder dashboard'
+                ]
+            },
+            silver: {
+                name: 'Silver Tier',
+                emoji: '🥈',
+                min: 10000,
+                max: 99999,
+                color: 'border-gray-400',
+                benefits: [
+                    '• 10% reduced transaction fees',
+                    '• Vote on governance proposals',
+                    '• Priority customer support',
+                    '• Advanced analytics dashboard',
+                    '• Early access to new features'
+                ]
+            },
+            gold: {
+                name: 'Gold Tier',
+                emoji: '🥇',
+                min: 100000,
+                max: Infinity,
+                color: 'border-yellow-400',
+                benefits: [
+                    '• 25% reduced transaction fees',
+                    '• Create governance proposals',
+                    '• VIP customer support',
+                    '• Full analytics + API access',
+                    '• Beta feature testing',
+                    '• Exclusive holder events',
+                    '• Revenue share opportunities'
+                ]
+            }
+        };
+
+        function getTier(amount) {
+            if (amount >= tiers.gold.min) return { key: 'gold', ...tiers.gold };
+            if (amount >= tiers.silver.min) return { key: 'silver', ...tiers.silver };
+            if (amount >= tiers.basic.min) return { key: 'basic', ...tiers.basic };
+            return null;
+        }
+
+        function getNextTier(amount) {
+            if (amount < tiers.silver.min) return tiers.silver;
+            if (amount < tiers.gold.min) return tiers.gold;
+            return null;
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(2) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(2) + 'K';
+            return num.toLocaleString();
+        }
+
+        function formatUSD(num) {
+            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function calculate() {
+            const amount = parseFloat(document.getElementById('tokenAmount').value) || 0;
+            const price = parseFloat(document.getElementById('tokenPrice').value) || 0;
+            
+            // Calculate total value
+            const totalValue = amount * price;
+            document.getElementById('totalValue').textContent = formatUSD(totalValue);
+            
+            // Get tier
+            const tier = getTier(amount);
+            const tierCard = document.getElementById('tierCard');
+            
+            if (!tier) {
+                document.getElementById('tierName').textContent = 'No Tier';
+                document.getElementById('tierEmoji').textContent = '🔒';
+                document.getElementById('tierDescription').textContent = 'Minimum 1 token required';
+                document.getElementById('tierBenefits').innerHTML = '<li class="text-gray-500">• No benefits</li>';
+                tierCard.className = 'bg-gray-900 p-8 rounded-xl border border-gray-800';
+                
+                document.getElementById('progressPercent').textContent = '0%';
+                document.getElementById('progressBar').style.width = '0%';
+                document.getElementById('progressText').textContent = 'Get at least 1 token to unlock Basic tier';
+                return;
+            }
+            
+            // Update tier display
+            document.getElementById('tierName').textContent = tier.name;
+            document.getElementById('tierEmoji').textContent = tier.emoji;
+            document.getElementById('tierDescription').textContent = `You hold ${formatNumber(amount)} tokens`;
+            document.getElementById('tierBenefits').innerHTML = tier.benefits.map(b => `<li>${b}</li>`).join('');
+            tierCard.className = `bg-gray-900 p-8 rounded-xl border ${tier.color}`;
+            
+            // Calculate progress to next tier
+            const nextTier = getNextTier(amount);
+            if (nextTier) {
+                const current = amount - tier.min;
+                const needed = nextTier.min - tier.min;
+                const percent = Math.min(100, (current / needed) * 100);
+                
+                document.getElementById('progressPercent').textContent = percent.toFixed(1) + '%';
+                document.getElementById('progressBar').style.width = percent + '%';
+                
+                const remaining = nextTier.min - amount;
+                document.getElementById('progressText').textContent = 
+                    `${formatNumber(remaining)} more tokens needed for ${nextTier.name}`;
+            } else {
+                document.getElementById('progressPercent').textContent = '100%';
+                document.getElementById('progressBar').style.width = '100%';
+                document.getElementById('progressText').textContent = 'Maximum tier achieved! 🎉';
+            }
+        }
+
+        function setAmount(amount) {
+            document.getElementById('tokenAmount').value = amount;
+            calculate();
+        }
+
+        function reset() {
+            document.getElementById('tokenAmount').value = '';
+            document.getElementById('tokenPrice').value = '0.10';
+            calculate();
+        }
+
+        // Initial calculation
+        calculate();
+    </script>
+
+<!-- Feedback Widget -->
+<style>.fb-btn{position:fixed;bottom:15px;right:15px;background:rgba(0,0,0,0.05);color:#6b7280;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:12px;z-index:9999;border:1px solid rgba(0,0,0,0.1);transition:all 0.2s;opacity:0.4}.fb-btn:hover{opacity:1;background:rgba(0,0,0,0.08);transform:translateY(-1px)}.fb-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:10000;align-items:center;justify-content:center}.fb-modal.active{display:flex}.fb-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%}.fb-content h3{margin:0 0 20px;color:#1f2937}.fb-content textarea,.fb-content input{width:100%;padding:12px;margin-bottom:15px;border:1px solid #d1d5db;border-radius:6px;font-size:14px}.fb-content textarea{min-height:120px}.fb-btns{display:flex;gap:10px;justify-content:flex-end}.fb-btns button{padding:10px 20px;border-radius:6px;border:none;cursor:pointer;font-weight:600}.fb-submit{background:#3b82f6;color:#fff}.fb-cancel{background:#e5e7eb;color:#374151}.fb-ok{color:#10b981;margin-top:10px;display:none}</style>
+<button class="fb-btn" onclick="openFB()">💬 Feedback</button>
+<div class="fb-modal" id="fbModal"><div class="fb-content"><h3>Send Feedback</h3><input id="fbEmail" placeholder="Your email (optional)"><textarea id="fbMsg" placeholder="Share your thoughts, report a bug, or request a feature..."></textarea><div class="fb-btns"><button class="fb-cancel" onclick="closeFB()">Cancel</button><button class="fb-submit" onclick="sendFB()">Submit</button></div><div class="fb-ok" id="fbOk">✅ Thank you! Your feedback has been sent.</div></div></div>
+<script>function openFB(){document.getElementById('fbModal').classList.add('active')}function closeFB(){document.getElementById('fbModal').classList.remove('active');document.getElementById('fbMsg').value='';document.getElementById('fbEmail').value='';document.getElementById('fbOk').style.display='none'}function sendFB(){const msg=document.getElementById('fbMsg').value;if(!msg.trim()){alert('Please enter a message');return}console.log('Feedback:',{site:location.hostname,msg});document.getElementById('fbOk').style.display='block';setTimeout(closeFB,2000)}document.getElementById('fbModal').onclick=function(e){if(e.target===this)closeFB()}</script>
+</body>
+</html>

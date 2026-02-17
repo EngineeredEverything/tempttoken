@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Governance - TEMPT Token</title>
+    <meta name="description" content="Vote on treasury allocations, feature priorities, and ecosystem decisions. Token-weighted governance for $TMPT holders.">
+    <meta name="keywords" content="TMPT governance, DAO voting, token governance, community proposals, decentralized decision making">
+    <meta name="author" content="TEMPT Token">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tempttoken.com/governance.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tempttoken.com/governance.html">
+    <meta property="og:title" content="Governance - TEMPT Token">
+    <meta property="og:description" content="Vote on treasury allocations, feature priorities, and ecosystem decisions. Token-weighted governance for $TMPT holders.">
+    <meta property="og:image" content="https://tempttoken.com/social-preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tempttoken.com/governance.html">
+    <meta property="twitter:title" content="Governance - TEMPT Token">
+    <meta property="twitter:description" content="Vote on treasury allocations, feature priorities, and ecosystem decisions. Token-weighted governance for $TMPT holders.">
+    <meta property="twitter:image" content="https://tempttoken.com/social-preview.png">
+    
+    <!-- Analytics: Uncomment ONE option below and add your tracking ID -->
+    
+    <!-- Option 1: Plausible Analytics (Recommended - Privacy-focused, no cookies) -->
+    <!-- <script defer data-domain="tmpttoken.com" src="https://plausible.io/js/script.js"></script> -->
+    
+    <!-- Option 2: Google Analytics 4 -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID_HERE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_GA4_ID_HERE');
+    </script> -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    </style>
+</head>
+<body class="bg-gray-950 text-white">
+    <nav class="container mx-auto px-6 py-4 border-b border-gray-800">
+        <div class="flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold">🪙 TEMPT</a>
+            <div class="space-x-6">
+                <a href="dashboard.html" class="hover:text-purple-400 transition">Dashboard</a>
+                <a href="governance.html" class="text-purple-400">Governance</a>
+                <a href="calculator.html" class="hover:text-purple-400 transition">Calculator</a>
+                <a href="blog.html" class="hover:text-purple-400 transition">Blog</a>
+                <a href="litepaper.html" class="hover:text-purple-400 transition">Litepaper</a>
+                <a href="faq.html" class="hover:text-purple-400 transition">FAQ</a>
+                <a href="index.html" class="hover:text-purple-400 transition">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-12">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-bold">Governance Portal</h1>
+            <button onclick="showCreateProposal()" class="gradient-bg px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                Create Proposal
+            </button>
+        </div>
+
+        <!-- Active Proposals -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-semibold mb-6">Active Proposals</h2>
+            <div class="space-y-6">
+                <!-- Proposal 1 -->
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-purple-500 transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <div class="text-sm text-green-400 mb-2">● ACTIVE</div>
+                            <h3 class="text-xl font-semibold mb-2">Proposal #4: Increase Marketing Budget</h3>
+                            <p class="text-gray-400">Allocate 50,000 $TMPT from treasury for Q2 marketing initiatives including social media campaigns and influencer partnerships.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <div class="text-sm text-gray-400 mb-1">For</div>
+                            <div class="bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-green-500 h-full" style="width: 72%"></div>
+                            </div>
+                            <div class="text-sm mt-1">72% (360,000 votes)</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-400 mb-1">Against</div>
+                            <div class="bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-red-500 h-full" style="width: 28%"></div>
+                            </div>
+                            <div class="text-sm mt-1">28% (140,000 votes)</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="vote(4, 'for')" class="flex-1 bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold transition">Vote For</button>
+                        <button onclick="vote(4, 'against')" class="flex-1 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-semibold transition">Vote Against</button>
+                    </div>
+                    <div class="text-sm text-gray-500 mt-3">Ends in 3 days</div>
+                </div>
+
+                <!-- Proposal 2 -->
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-purple-500 transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <div class="text-sm text-green-400 mb-2">● ACTIVE</div>
+                            <h3 class="text-xl font-semibold mb-2">Proposal #5: Add Staking Rewards</h3>
+                            <p class="text-gray-400">Implement 5% APY staking rewards for holders who lock tokens for 90 days or more.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <div class="text-sm text-gray-400 mb-1">For</div>
+                            <div class="bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-green-500 h-full" style="width: 89%"></div>
+                            </div>
+                            <div class="text-sm mt-1">89% (445,000 votes)</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-400 mb-1">Against</div>
+                            <div class="bg-gray-800 rounded-full h-3 overflow-hidden">
+                                <div class="bg-red-500 h-full" style="width: 11%"></div>
+                            </div>
+                            <div class="text-sm mt-1">11% (55,000 votes)</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="vote(5, 'for')" class="flex-1 bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold transition">Vote For</button>
+                        <button onclick="vote(5, 'against')" class="flex-1 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-semibold transition">Vote Against</button>
+                    </div>
+                    <div class="text-sm text-gray-500 mt-3">Ends in 5 days</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Proposals -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-6">Recently Completed</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 opacity-70">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-sm text-green-400 mb-2">✓ PASSED</div>
+                            <h3 class="text-lg font-semibold mb-2">Proposal #3: Deploy on Raydium DEX</h3>
+                            <p class="text-sm text-gray-400">Final: 85% For, 15% Against</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 opacity-70">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-sm text-red-400 mb-2">✗ REJECTED</div>
+                            <h3 class="text-lg font-semibold mb-2">Proposal #2: Burn 10% of Supply</h3>
+                            <p class="text-sm text-gray-400">Final: 42% For, 58% Against</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Proposal Modal -->
+    <div id="createModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center p-6">
+        <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 max-w-2xl w-full">
+            <h2 class="text-2xl font-bold mb-6">Create New Proposal</h2>
+            <form onsubmit="submitProposal(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">Title</label>
+                    <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:border-purple-500 focus:outline-none" placeholder="e.g., Increase Development Budget" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">Description</label>
+                    <textarea class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:border-purple-500 focus:outline-none h-32" placeholder="Detailed explanation of your proposal..." required></textarea>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold mb-2">Voting Period</label>
+                    <select class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:border-purple-500 focus:outline-none">
+                        <option>3 days</option>
+                        <option>5 days</option>
+                        <option selected>7 days</option>
+                        <option>14 days</option>
+                    </select>
+                </div>
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-1 gradient-bg px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">Submit Proposal</button>
+                    <button type="button" onclick="hideCreateProposal()" class="flex-1 bg-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function vote(proposalId, direction) {
+            alert(`Vote "${direction}" recorded for Proposal #${proposalId}!\n\nNote: This is a demo. Real voting would require wallet signature.`);
+        }
+
+        function showCreateProposal() {
+            document.getElementById('createModal').classList.remove('hidden');
+        }
+
+        function hideCreateProposal() {
+            document.getElementById('createModal').classList.add('hidden');
+        }
+
+        function submitProposal(e) {
+            e.preventDefault();
+            alert('Proposal submitted successfully!\n\nNote: This is a demo. Real proposal creation would require 10,000 $TMPT minimum.');
+            hideCreateProposal();
+        }
+    </script>
+</body>
+</html>

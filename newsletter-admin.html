@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Subscribers - TEMPT Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-950 text-white min-h-screen">
+    <div class="container mx-auto px-6 py-12 max-w-4xl">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">📧 Newsletter Subscribers</h1>
+            <p class="text-gray-400">View and manage email signups for $TMPT launch notifications</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <div class="text-3xl font-bold text-purple-400" id="totalCount">0</div>
+                <p class="text-gray-400 mt-1">Total Subscribers</p>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <div class="text-3xl font-bold text-green-400" id="todayCount">0</div>
+                <p class="text-gray-400 mt-1">Added Today</p>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <div class="text-3xl font-bold text-blue-400" id="weekCount">0</div>
+                <p class="text-gray-400 mt-1">This Week</p>
+            </div>
+        </div>
+
+        <!-- Export Options -->
+        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Export Subscribers</h2>
+            <div class="flex gap-4">
+                <button onclick="exportCSV()" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-semibold transition">
+                    📥 Download CSV
+                </button>
+                <button onclick="copyEmails()" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold transition">
+                    📋 Copy Emails
+                </button>
+                <button onclick="clearAll()" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-semibold transition ml-auto">
+                    🗑️ Clear All
+                </button>
+            </div>
+            <p id="exportMessage" class="mt-4 text-green-400 font-semibold hidden"></p>
+        </div>
+
+        <!-- Subscriber List -->
+        <div class="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
+            <div class="p-6 border-b border-gray-800">
+                <h2 class="text-xl font-semibold">Subscriber List</h2>
+            </div>
+            <div class="divide-y divide-gray-800" id="subscriberList">
+                <div class="p-8 text-center text-gray-500">
+                    Loading subscribers...
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration Guide -->
+        <div class="mt-8 bg-blue-900/20 border border-blue-800 rounded-xl p-6">
+            <h3 class="text-lg font-semibold mb-3">🔗 Next Steps: Email Service Integration</h3>
+            <p class="text-gray-300 mb-4">Currently, emails are stored in browser localStorage (temporary). To send actual emails, integrate with:</p>
+            <ul class="list-disc list-inside space-y-2 text-gray-400">
+                <li><strong>Mailchimp</strong> - $13/month for 500 subscribers (industry standard)</li>
+                <li><strong>ConvertKit</strong> - $9/month for 300 subscribers (creator-focused)</li>
+                <li><strong>EmailOctopus</strong> - $8/month for 500 subscribers (budget-friendly)</li>
+                <li><strong>Custom Serverless Function</strong> - Free tier on Vercel/Netlify + email API</li>
+            </ul>
+            <p class="text-gray-400 mt-4">To integrate, update the form submission code in <code class="bg-gray-800 px-2 py-1 rounded">index.html</code> to POST to your chosen service's API.</p>
+        </div>
+
+        <!-- Back Link -->
+        <div class="mt-8 text-center">
+            <a href="index.html" class="text-purple-400 hover:text-purple-300 transition">← Back to Homepage</a>
+        </div>
+    </div>
+
+    <script>
+        // Load subscribers from localStorage
+        function loadSubscribers() {
+            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
+            const listElement = document.getElementById('subscriberList');
+            
+            if (subscribers.length === 0) {
+                listElement.innerHTML = '<div class="p-8 text-center text-gray-500">No subscribers yet. Share the homepage to get signups!</div>';
+                return;
+            }
+            
+            // Display subscribers
+            listElement.innerHTML = subscribers.map((email, index) => `
+                <div class="p-4 hover:bg-gray-800 transition flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="text-gray-500 font-mono text-sm">#${index + 1}</div>
+                        <div class="text-white">${email}</div>
+                    </div>
+                    <button onclick="removeSubscriber('${email}')" class="text-red-400 hover:text-red-300 text-sm">
+                        Remove
+                    </button>
+                </div>
+            `).join('');
+            
+            // Update stats
+            document.getElementById('totalCount').textContent = subscribers.length;
+            // Note: today/week counts would require timestamp tracking (enhancement for later)
+            document.getElementById('todayCount').textContent = '-';
+            document.getElementById('weekCount').textContent = '-';
+        }
+
+        // Export as CSV
+        function exportCSV() {
+            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
+            if (subscribers.length === 0) {
+                alert('No subscribers to export');
+                return;
+            }
+            
+            const csv = 'Email\n' + subscribers.join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'tmpt-subscribers-' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click();
+            
+            showMessage('✅ CSV downloaded successfully!');
+        }
+
+        // Copy emails to clipboard
+        function copyEmails() {
+            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
+            if (subscribers.length === 0) {
+                alert('No subscribers to copy');
+                return;
+            }
+            
+            const emails = subscribers.join(', ');
+            navigator.clipboard.writeText(emails).then(() => {
+                showMessage('✅ ' + subscribers.length + ' emails copied to clipboard!');
+            }).catch(() => {
+                alert('Failed to copy. Please try again.');
+            });
+        }
+
+        // Remove subscriber
+        function removeSubscriber(email) {
+            if (!confirm('Remove ' + email + ' from the list?')) return;
+            
+            let subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
+            subscribers = subscribers.filter(e => e !== email);
+            localStorage.setItem('tmpt_subscribers', JSON.stringify(subscribers));
+            loadSubscribers();
+            showMessage('✅ Subscriber removed');
+        }
+
+        // Clear all subscribers
+        function clearAll() {
+            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
+            if (subscribers.length === 0) {
+                alert('No subscribers to clear');
+                return;
+            }
+            
+            if (!confirm('Are you sure you want to delete ALL ' + subscribers.length + ' subscribers? This cannot be undone!')) return;
+            
+            localStorage.removeItem('tmpt_subscribers');
+            loadSubscribers();
+            showMessage('✅ All subscribers cleared');
+        }
+
+        // Show message
+        function showMessage(msg) {
+            const msgElement = document.getElementById('exportMessage');
+            msgElement.textContent = msg;
+            msgElement.classList.remove('hidden');
+            setTimeout(() => {
+                msgElement.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Load on page load
+        loadSubscribers();
+
+        // Auto-refresh every 30 seconds (in case multiple tabs open)
+        setInterval(loadSubscribers, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Platforms - TEMPT Token Integration | $TMPT</title>
+    <meta name="description" content="Integrate $TMPT into your cam site, AI bot platform, or adult marketplace. Lower fees, global reach, instant settlements.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00d4ff, #5b21b6, #d946ef);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cccccc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        /* Benefits Grid */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .benefit h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .benefit p {
+            font-size: 1rem;
+            color: #cccccc;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #00ff88;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* API Section */
+        .api-example {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 60px 0;
+        }
+
+        .api-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .api-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(217, 70, 239, 0.1));
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #d946ef);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-logo">
+                <span class="gradient-text">$TMPT</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#api">API Docs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="gradient-text">Payments That Work<br>For Adult Platforms</h1>
+                <p>Lower fees, instant settlements, global reach. Integrate $TMPT and give your users the payment method they deserve.</p>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="section" id="benefits">
+            <div class="container">
+                <h2 class="gradient-text">Why Integrate $TMPT</h2>
+
+                <div class="benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon">💸</div>
+                        <h3>Maximize Creator Revenue</h3>
+                        <p>0.1-0.5% fees vs 5-15% for credit cards. Creators keep 10-15% more per transaction. Happier creators = more retention.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">⚡</div>
+                        <h3>Instant Settlements</h3>
+                        <p>Crypto transactions settle instantly. No 7-30 day payment holds. Improve creator cash flow dramatically.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">🚫</div>
+                        <h3>Zero Chargebacks</h3>
+                        <p>Blockchain transactions are irreversible. Eliminate chargeback fraud and associated fees entirely.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">🌍</div>
+                        <h3>Global Payments</h3>
+                        <p>Accept payments from anywhere. No banking restrictions, no geographic limits, no payment processor bans.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">🔒</div>
+                        <h3>User Privacy</h3>
+                        <p>Anonymous transactions = more comfortable users = higher conversion rates. No embarrassing statements.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">🛡️</div>
+                        <h3>Deplatforming Protection</h3>
+                        <p>Never worry about Stripe/PayPal shutting you down again. Censorship-resistant payments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Documentation Section -->
+        <section class="api-example" id="api">
+            <div class="container">
+                <h2 class="gradient-text">Integration in 3 Steps</h2>
+
+                <div class="api-card">
+                    <h3>1. Accept $TMPT Wallet Addresses</h3>
+                    <p>Let users connect their Solana wallets (Phantom, Solflare, etc.) to your platform.</p>
+                    <div class="code-block">
+<code>// Example: Connect wallet button
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+
+&lt;WalletMultiButton /&gt;</code>
+                    </div>
+                </div>
+
+                <div class="api-card">
+                    <h3>2. Process $TMPT Payments</h3>
+                    <p>Use our SDK or smart contract to handle tips, subscriptions, and micropayments.</p>
+                    <div class="code-block">
+<code>// Example: Send $TMPT tip
+const sendTip = async (recipientAddress, amountTMPT) => {
+    const transaction = await tmptToken.transfer({
+        to: recipientAddress,
+        amount: amountTMPT,
+        metadata: { type: 'tip', platformFee: 0.001 }
+    });
+    return transaction;
+};</code>
+                    </div>
+                </div>
+
+                <div class="api-card">
+                    <h3>3. Earn Platform Fees</h3>
+                    <p>Take 0.1-1% platform fees automatically. Still way cheaper than credit cards.</p>
+                    <div class="code-block">
+<code>// Example fee structure:
+User tips 100 TMPT → Creator receives 99 TMPT → Platform gets 1 TMPT
+(vs. credit card: 85 TMPT to creator, 15 TMPT to Stripe)</code>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: 40px; font-size: 1.2rem;">
+                    📚 <strong>Full API docs, SDKs, and code examples coming soon.</strong><br>
+                    <a href="mailto:partnerships@tempttoken.com" style="color: #00d4ff;">Contact us</a> for early access and integration support.
+                </p>
+            </div>
+        </section>
+
+        <!-- Target Platforms Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="gradient-text">Perfect For</h2>
+
+                <div class="benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon">📹</div>
+                        <h3>Cam Sites</h3>
+                        <p>Live streaming platforms, private shows, tip-based monetization.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">🤖</div>
+                        <h3>AI Companion Platforms</h3>
+                        <p>AI sex bots, virtual girlfriend/boyfriend apps, pay-per-message services.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">📸</div>
+                        <h3>Content Marketplaces</h3>
+                        <p>OnlyFans-style platforms, custom content, creator subscriptions.</p>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">🎮</div>
+                        <h3>Adult Games</h3>
+                        <p>In-game purchases, character unlocks, premium content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" id="contact">
+            <div class="container">
+                <h2 class="gradient-text">Ready to Integrate?</h2>
+                <p style="color: #cccccc; font-size: 1.2rem; margin-bottom: 40px;">
+                    Join the platforms already building the future of adult industry payments.
+                </p>
+                <a href="mailto:partnerships@tempttoken.com" class="btn btn-primary">📧 partnerships@tempttoken.com</a>
+                <p style="color: #999; margin-top: 30px; font-size: 1rem;">
+                    We offer integration support, technical consultation, and co-marketing opportunities.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: rgba(0, 0, 0, 0.5); padding: 40px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+        <div class="container">
+            <p style="color: #666; font-size: 0.9rem;">
+                &copy; 2025 TEMPT Token. All rights reserved. | 
+                <a href="mailto:partnerships@tempttoken.com" style="color: #00d4ff;">partnerships@tempttoken.com</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

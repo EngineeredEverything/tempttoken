@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litepaper - TEMPT Token</title>
+    <meta name="description" content="Technical overview of TEMPT Token: tokenomics, utility framework, governance model, security measures, and roadmap. Complete $TMPT documentation.">
+    <meta name="keywords" content="TMPT litepaper, tokenomics, whitepaper, technical documentation, token utility, governance model, crypto whitepaper">
+    <meta name="author" content="TEMPT Token">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tempttoken.com/litepaper.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tempttoken.com/litepaper.html">
+    <meta property="og:title" content="Litepaper - TEMPT Token">
+    <meta property="og:description" content="Technical overview of TEMPT Token: tokenomics, utility framework, governance model, security measures, and roadmap.">
+    <meta property="og:image" content="https://tempttoken.com/social-preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tempttoken.com/litepaper.html">
+    <meta property="twitter:title" content="Litepaper - TEMPT Token">
+    <meta property="twitter:description" content="Technical overview of TEMPT Token: tokenomics, utility framework, governance model, security measures, and roadmap.">
+    <meta property="twitter:image" content="https://tempttoken.com/social-preview.png">
+    
+    <!-- Analytics: Uncomment ONE option below and add your tracking ID -->
+    
+    <!-- Option 1: Plausible Analytics (Recommended - Privacy-focused, no cookies) -->
+    <!-- <script defer data-domain="tmpttoken.com" src="https://plausible.io/js/script.js"></script> -->
+    
+    <!-- Option 2: Google Analytics 4 -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID_HERE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_GA4_ID_HERE');
+    </script> -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    </style>
+</head>
+<body class="bg-gray-950 text-white">
+    <nav class="container mx-auto px-6 py-4 border-b border-gray-800">
+        <div class="flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold">🪙 TEMPT</a>
+            <div class="space-x-6">
+                <a href="dashboard.html" class="hover:text-purple-400 transition">Dashboard</a>
+                <a href="governance.html" class="hover:text-purple-400 transition">Governance</a>
+                <a href="calculator.html" class="hover:text-purple-400 transition">Calculator</a>
+                <a href="blog.html" class="hover:text-purple-400 transition">Blog</a>
+                <a href="litepaper.html" class="text-purple-400">Litepaper</a>
+                <a href="faq.html" class="hover:text-purple-400 transition">FAQ</a>
+                <a href="index.html" class="hover:text-purple-400 transition">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-12 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h1 class="text-5xl font-bold mb-4">TEMPT Token Litepaper</h1>
+            <p class="text-xl text-gray-400">A Utility-First Crypto Ecosystem</p>
+            <p class="text-sm text-gray-500 mt-2">Version 1.0 • February 2026</p>
+        </div>
+
+        <!-- Executive Summary -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">Executive Summary</h2>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    TEMPT Token ($TMPT) is a Solana-based utility token designed to power a sustainable crypto ecosystem 
+                    through real utility, community governance, and transparent operations.
+                </p>
+                <p class="text-gray-300 leading-relaxed">
+                    Unlike speculative tokens, $TMPT creates demand through tiered access to platform features, 
+                    deflationary mechanisms, and community-driven decision making.
+                </p>
+            </div>
+        </section>
+
+        <!-- Problem Statement -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">The Problem</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">❌ Lack of Real Utility</h3>
+                    <p class="text-gray-400">Most crypto tokens have no practical use case beyond speculation.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">❌ Unsustainable Tokenomics</h3>
+                    <p class="text-gray-400">Inflationary models that constantly dilute holder value.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-2">❌ No Community Control</h3>
+                    <p class="text-gray-400">Centralized decision-making that ignores holder interests.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">The TEMPT Solution</h2>
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <div class="text-4xl mb-3">🔑</div>
+                        <h3 class="text-lg font-semibold mb-2">Real Utility</h3>
+                        <p class="text-gray-400 text-sm">Access premium features, discounts, and exclusive tools</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-3">🔥</div>
+                        <h3 class="text-lg font-semibold mb-2">Deflationary</h3>
+                        <p class="text-gray-400 text-sm">Transaction fees burned, reducing supply over time</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-3">🗳️</div>
+                        <h3 class="text-lg font-semibold mb-2">Community-Led</h3>
+                        <p class="text-gray-400 text-sm">Token holders vote on all major decisions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenomics -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">Tokenomics</h2>
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Supply Distribution</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-400">Community (Public Sale)</span>
+                                    <span class="font-semibold">40%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="gradient-bg h-2 rounded-full" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-400">Liquidity Pool</span>
+                                    <span class="font-semibold">25%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-400">Development Fund</span>
+                                    <span class="font-semibold">20%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-400">Team (2yr vesting)</span>
+                                    <span class="font-semibold">10%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 10%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-400">Marketing & Partnerships</span>
+                                    <span class="font-semibold">5%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-pink-500 h-2 rounded-full" style="width: 5%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Token Metrics</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between p-3 bg-gray-800 rounded">
+                                <span class="text-gray-400">Total Supply</span>
+                                <span class="font-semibold">1,000,000,000</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-gray-800 rounded">
+                                <span class="text-gray-400">Blockchain</span>
+                                <span class="font-semibold">Solana</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-gray-800 rounded">
+                                <span class="text-gray-400">Transaction Fee</span>
+                                <span class="font-semibold">3% (2% burn, 1% dev)</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-gray-800 rounded">
+                                <span class="text-gray-400">Deflationary</span>
+                                <span class="font-semibold text-green-400">✓ Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Utility Framework -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">Utility Framework</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-3">🥉 Basic Tier (0-999 $TMPT)</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>• Access to public governance votes</li>
+                        <li>• Community Discord access</li>
+                        <li>• Weekly ecosystem updates</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-3">🥈 Silver Tier (1,000-9,999 $TMPT)</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>• 10% discount on platform fees</li>
+                        <li>• Early access to new features</li>
+                        <li>• Priority support channel</li>
+                        <li>• Exclusive holder events</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="text-xl font-semibold mb-3">🥇 Gold Tier (10,000+ $TMPT)</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>• 25% discount on platform fees</li>
+                        <li>• Beta access to all new products</li>
+                        <li>• Proposal submission rights</li>
+                        <li>• VIP support & monthly AMAs</li>
+                        <li>• Revenue share program eligibility</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Governance -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">Governance Model</h2>
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800">
+                <p class="text-gray-300 mb-6">
+                    $TMPT holders participate in ecosystem decisions through weighted voting:
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-3">Voting Power</h4>
+                        <p class="text-gray-400 text-sm mb-2">1 $TMPT = 1 vote (square root model for fairness)</p>
+                        <p class="text-gray-400 text-sm">Prevents whale dominance while rewarding larger holders</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">Proposal Types</h4>
+                        <ul class="text-gray-400 text-sm space-y-1">
+                            <li>• Treasury allocation</li>
+                            <li>• Feature prioritization</li>
+                            <li>• Partnership approvals</li>
+                            <li>• Fee structure changes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">Roadmap</h2>
+            <div class="space-y-4">
+                <div class="bg-gray-900 p-6 rounded-xl border-l-4 border-green-500">
+                    <h3 class="text-xl font-semibold mb-2">Phase 1: Foundation (Q1 2026) ✅</h3>
+                    <ul class="text-gray-400 space-y-1">
+                        <li>✓ Token contract deployment</li>
+                        <li>✓ Website & dashboard launch</li>
+                        <li>✓ Community building</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border-l-4 border-purple-500">
+                    <h3 class="text-xl font-semibold mb-2">Phase 2: Growth (Q2 2026) 🔄</h3>
+                    <ul class="text-gray-400 space-y-1">
+                        <li>• DEX listings (Raydium, Orca)</li>
+                        <li>• Governance launch</li>
+                        <li>• First utility feature rollout</li>
+                        <li>• Strategic partnerships</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border-l-4 border-gray-600">
+                    <h3 class="text-xl font-semibold mb-2">Phase 3: Expansion (Q3-Q4 2026)</h3>
+                    <ul class="text-gray-400 space-y-1">
+                        <li>• CEX listings</li>
+                        <li>• Advanced features (staking, NFTs)</li>
+                        <li>• Mobile app</li>
+                        <li>• Ecosystem grants program</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security & Compliance -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">Security & Compliance</h2>
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-3 flex items-center">
+                            <span class="text-2xl mr-2">🔒</span> Security Measures
+                        </h4>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>• Smart contract audit (pre-launch)</li>
+                            <li>• Multisig treasury wallet</li>
+                            <li>• Bug bounty program</li>
+                            <li>• Regular security reviews</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3 flex items-center">
+                            <span class="text-2xl mr-2">⚖️</span> Compliance
+                        </h4>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>• Full transparency reports</li>
+                            <li>• KYC for team members</li>
+                            <li>• Clear legal disclaimers</li>
+                            <li>• No investment promises</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-4 text-purple-400">Team</h2>
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800">
+                <p class="text-gray-300 mb-4">
+                    Built by experienced crypto builders committed to sustainable growth and community success.
+                </p>
+                <p class="text-gray-400 text-sm">
+                    Team tokens subject to 2-year linear vesting with 6-month cliff to ensure long-term alignment.
+                </p>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="mb-12">
+            <div class="bg-yellow-900/20 border border-yellow-600/50 p-6 rounded-xl">
+                <h3 class="text-yellow-400 font-semibold mb-2">⚠️ Important Disclaimer</h3>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    This litepaper is for informational purposes only. $TMPT is a utility token, not a security or investment. 
+                    Crypto markets are volatile and risky. Never invest more than you can afford to lose. 
+                    Do your own research and consult with financial professionals before participating.
+                </p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="text-center">
+            <a href="index.html" class="inline-block gradient-bg px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition">
+                Join the TEMPT Ecosystem
+            </a>
+        </div>
+    </div>
+
+    <footer class="border-t border-gray-800 mt-16 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+            <p>© 2026 TEMPT Token. All rights reserved.</p>
+            <p class="mt-2">Not financial advice. Crypto is risky. DYOR.</p>
+        </div>
+    </footer>
+</body>
+</html>

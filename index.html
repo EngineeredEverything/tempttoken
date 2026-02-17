@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMPT Token ($TMPT) - The Incentive Engine</title>
+    <meta name="description" content="A credible, utility-driven Solana token built on first principles: sustained net demand through real use cases, transparent operations, and community trust.">
+    <meta name="keywords" content="TMPT, TEMPT Token, cryptocurrency, Solana token, utility token, governance, DeFi, blockchain, crypto, buy TMPT">
+    <meta name="author" content="TEMPT Token">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tempttoken.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tempttoken.com/">
+    <meta property="og:title" content="TEMPT Token ($TMPT) - The Incentive Engine">
+    <meta property="og:description" content="A credible, utility-driven Solana token with governance, access tiers, and sustainable tokenomics.">
+    <meta property="og:image" content="https://tempttoken.com/social-preview.png">
+    <meta property="og:site_name" content="TEMPT Token">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tempttoken.com/">
+    <meta property="twitter:title" content="TEMPT Token ($TMPT) - The Incentive Engine">
+    <meta property="twitter:description" content="A credible, utility-driven Solana token with governance, access tiers, and sustainable tokenomics.">
+    <meta property="twitter:image" content="https://tempttoken.com/social-preview.png">
+    
+    <!-- JSON-LD Structured Data for AI & Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "TEMPT Token",
+      "alternateName": "$TMPT",
+      "url": "https://tempttoken.com",
+      "logo": "https://tempttoken.com/social-preview.png",
+      "description": "A credible, utility-driven Solana token with governance, access tiers, and sustainable tokenomics. Built on first principles: sustained net demand through real use cases, transparent operations, and community trust.",
+      "sameAs": [
+        "https://twitter.com/TEMPTtoken",
+        "https://t.me/TEMPTtoken"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "TEMPT Token Dashboard",
+      "url": "https://tempttoken.com/dashboard.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "Connect your Solana wallet to manage your $TMPT holdings, vote on governance proposals, and access tier benefits.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is TEMPT Token?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TEMPT Token ($TMPT) is a utility-driven cryptocurrency on the Solana blockchain. It provides holders with access to governance voting, premium features, and ecosystem benefits through a tiered membership system."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I buy TEMPT Token?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can buy $TMPT on Solana decentralized exchanges. Connect a Solana wallet like Phantom, then swap SOL for TMPT using the contract address listed on our dashboard."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What blockchain is TEMPT Token on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TEMPT Token is built on the Solana blockchain, offering fast transactions and low fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is TEMPT Token used for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TEMPT Token provides three main utilities: 1) Access to premium features and gated content based on holding tier, 2) Governance voting power on ecosystem decisions, and 3) Discounts and credits for ecosystem services."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Analytics: Uncomment ONE option below and add your tracking ID -->
+    
+    <!-- Option 1: Plausible Analytics (Recommended - Privacy-focused, no cookies) -->
+    <!-- <script defer data-domain="tmpttoken.com" src="https://plausible.io/js/script.js"></script> -->
+    
+    <!-- Option 2: Google Analytics 4 -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID_HERE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_GA4_ID_HERE');
+    </script> -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .glow { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+    </style>
+</head>
+<body class="bg-gray-950 text-white">
+    <!-- Hero Section -->
+    <nav class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <div class="text-2xl font-bold">🪙 TEMPT</div>
+            <div class="space-x-6">
+                <a href="dashboard.html" class="hover:text-purple-400 transition">Dashboard</a>
+                <a href="governance.html" class="hover:text-purple-400 transition">Governance</a>
+                <a href="calculator.html" class="hover:text-purple-400 transition">Calculator</a>
+                <a href="blog.html" class="hover:text-purple-400 transition">Blog</a>
+                <a href="litepaper.html" class="hover:text-purple-400 transition">Litepaper</a>
+                <a href="faq.html" class="hover:text-purple-400 transition">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container mx-auto px-6 py-20 text-center">
+        <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            TEMPT Token ($TMPT)
+        </h1>
+        <p class="text-2xl mb-8 text-gray-300">The Incentive Engine for the Next Generation</p>
+        <p class="text-lg mb-12 text-gray-400 max-w-2xl mx-auto">
+            A credible, utility-driven crypto token built on first principles: sustained net demand through real use cases, transparent operations, and community trust.
+        </p>
+        <div class="flex gap-4 justify-center">
+            <a href="dashboard.html" class="gradient-bg px-8 py-4 rounded-lg font-semibold hover:glow transition">
+                Launch Dashboard
+            </a>
+            <a href="governance.html" class="border border-purple-500 px-8 py-4 rounded-lg font-semibold hover:bg-purple-900/20 transition">
+                Governance Portal
+            </a>
+        </div>
+    </section>
+
+    <!-- Utility Section -->
+    <section id="utility" class="container mx-auto px-6 py-20">
+        <h2 class="text-4xl font-bold text-center mb-12">Real Utility, Real Value</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 hover:border-purple-500 transition">
+                <div class="text-4xl mb-4">🎯</div>
+                <h3 class="text-xl font-semibold mb-3">Access & Membership</h3>
+                <p class="text-gray-400">Unlock premium tools, exclusive content, and gated features with $TMPT holdings.</p>
+            </div>
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 hover:border-purple-500 transition">
+                <div class="text-4xl mb-4">💎</div>
+                <h3 class="text-xl font-semibold mb-3">Discounts & Credits</h3>
+                <p class="text-gray-400">Pay with $TMPT to receive discounts on services and ecosystem perks.</p>
+            </div>
+            <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 hover:border-purple-500 transition">
+                <div class="text-4xl mb-4">🗳️</div>
+                <h3 class="text-xl font-semibold mb-3">Governance</h3>
+                <p class="text-gray-400">Vote on treasury allocation, feature priorities, and ecosystem direction.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="container mx-auto px-6 py-20 bg-gray-900/30">
+        <h2 class="text-4xl font-bold text-center mb-12">Tokenomics</h2>
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            <div class="text-center p-6">
+                <div class="text-5xl font-bold text-purple-400 mb-2">Solana</div>
+                <p class="text-gray-400">Blockchain</p>
+            </div>
+            <div class="text-center p-6">
+                <div class="text-5xl font-bold text-purple-400 mb-2">TBD</div>
+                <p class="text-gray-400">Total Supply</p>
+            </div>
+            <div class="text-center p-6">
+                <div class="text-5xl font-bold text-purple-400 mb-2">0%</div>
+                <p class="text-gray-400">Team Allocation (Fair Launch)</p>
+            </div>
+            <div class="text-center p-6">
+                <div class="text-5xl font-bold text-purple-400 mb-2">Multisig</div>
+                <p class="text-gray-400">Treasury Security</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="container mx-auto px-6 py-20">
+        <h2 class="text-4xl font-bold text-center mb-12">Roadmap</h2>
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full gradient-bg flex items-center justify-center font-bold">Q1</div>
+                <div class="flex-1 bg-gray-900 p-6 rounded-xl border border-purple-500">
+                    <h3 class="font-semibold mb-2">Foundation & Launch</h3>
+                    <p class="text-gray-400">Token deployment on Solana, website launch, community building, initial liquidity.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center font-bold">Q2</div>
+                <div class="flex-1 bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="font-semibold mb-2">Utility Modules</h3>
+                    <p class="text-gray-400">Launch 3 core utility features, governance portal, staking mechanism.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center font-bold">Q3</div>
+                <div class="flex-1 bg-gray-900 p-6 rounded-xl border border-gray-800">
+                    <h3 class="font-semibold mb-2">Ecosystem Growth</h3>
+                    <p class="text-gray-400">Partnerships, DEX listings, mobile app, community rewards program.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="container mx-auto px-6 py-20">
+        <div class="max-w-2xl mx-auto bg-gradient-to-r from-purple-900/40 to-pink-900/40 p-12 rounded-2xl border border-purple-500/30 text-center">
+            <h2 class="text-4xl font-bold mb-4">Get Launch Updates</h2>
+            <p class="text-gray-300 mb-8">Be the first to know when $TMPT launches. Join our early community and get exclusive updates.</p>
+            <form id="newsletterForm" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input 
+                    type="email" 
+                    id="emailInput" 
+                    placeholder="Enter your email" 
+                    required
+                    class="flex-1 px-6 py-4 rounded-lg bg-gray-900 border border-gray-700 focus:border-purple-500 focus:outline-none text-white"
+                />
+                <button 
+                    type="submit"
+                    class="gradient-bg px-8 py-4 rounded-lg font-semibold hover:glow transition whitespace-nowrap"
+                >
+                    Notify Me
+                </button>
+            </form>
+            <p id="newsletterSuccess" class="mt-4 text-green-400 font-semibold hidden">✅ Success! Check your email to confirm.</p>
+            <p id="newsletterError" class="mt-4 text-red-400 font-semibold hidden">❌ Something went wrong. Please try again.</p>
+            <p class="text-sm text-gray-500 mt-6">No spam. Unsubscribe anytime. We respect your privacy.</p>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="container mx-auto px-6 py-20 bg-gray-900/30">
+        <h2 class="text-4xl font-bold text-center mb-12">Join the Community</h2>
+        <div class="flex justify-center gap-6">
+            <a href="#" class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-purple-500 transition flex items-center gap-3">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M13.6 11.2l.2.2 4.3-4.3c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.3 4.3.2.2c1.6 1.6 1.6 4.1 0 5.7-1.6 1.6-4.1 1.6-5.7 0-1.6-1.6-1.6-4.1 0-5.7 1.6-1.6 4.1-1.6 5.9 0zM8 12c0-.6.4-1 1-1s1 .4 1 1-.4 1-1 1-1-.4-1-1z"/></svg>
+                <span class="font-semibold">Discord</span>
+            </a>
+            <a href="#" class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-purple-500 transition flex items-center gap-3">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                <span class="font-semibold">Telegram</span>
+            </a>
+            <a href="#" class="bg-gray-900 p-6 rounded-xl border border-gray-800 hover:border-purple-500 transition flex items-center gap-3">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                <span class="font-semibold">Twitter</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-12 border-t border-gray-800 text-center text-gray-500">
+        <p class="mb-4">TEMPT Token ($TMPT) - Built on transparency, driven by utility</p>
+        <p class="text-sm">⚠️ Disclaimer: Cryptocurrency investments carry risk. This is not financial advice. DYOR.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Newsletter signup
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('emailInput').value;
+            const successMsg = document.getElementById('newsletterSuccess');
+            const errorMsg = document.getElementById('newsletterError');
+            
+            // Hide previous messages
+            successMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+            
+            // Validate email
+            if (!email || !email.includes('@')) {
+                errorMsg.textContent = '❌ Please enter a valid email address.';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+            
+            // Store locally for now (Clay can integrate with real email service later)
+            try {
+                const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
+                
+                // Check for duplicates
+                if (subscribers.includes(email)) {
+                    successMsg.textContent = '✅ You\'re already subscribed!';
+                    successMsg.classList.remove('hidden');
+                    document.getElementById('emailInput').value = '';
+                    return;
+                }
+                
+                // Add new subscriber
+                subscribers.push(email);
+                localStorage.setItem('tmpt_subscribers', JSON.stringify(subscribers));
+                
+                // Log to console (Clay can see this in browser dev tools)
+                console.log('📧 New subscriber:', email);
+                console.log('📊 Total subscribers:', subscribers.length);
+                
+                // Show success message
+                successMsg.classList.remove('hidden');
+                document.getElementById('emailInput').value = '';
+                
+                // TODO: Integrate with real email service
+                // Options: Mailchimp, ConvertKit, EmailOctopus, or custom serverless function
+                
+            } catch (error) {
+                console.error('Newsletter signup error:', error);
+                errorMsg.classList.remove('hidden');
+            }
+        });
+    </script>
+
+<!-- Feedback Widget -->
+<style>.fb-btn{position:fixed;bottom:15px;right:15px;background:rgba(0,0,0,0.05);color:#6b7280;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:12px;z-index:9999;border:1px solid rgba(0,0,0,0.1);transition:all 0.2s;opacity:0.4}.fb-btn:hover{opacity:1;background:rgba(0,0,0,0.08);transform:translateY(-1px)}.fb-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:10000;align-items:center;justify-content:center}.fb-modal.active{display:flex}.fb-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%}.fb-content h3{margin:0 0 20px;color:#1f2937}.fb-content textarea,.fb-content input{width:100%;padding:12px;margin-bottom:15px;border:1px solid #d1d5db;border-radius:6px;font-size:14px}.fb-content textarea{min-height:120px}.fb-btns{display:flex;gap:10px;justify-content:flex-end}.fb-btns button{padding:10px 20px;border-radius:6px;border:none;cursor:pointer;font-weight:600}.fb-submit{background:#3b82f6;color:#fff}.fb-cancel{background:#e5e7eb;color:#374151}.fb-ok{color:#10b981;margin-top:10px;display:none}</style>
+<button class="fb-btn" onclick="openFB()">💬 Feedback</button>
+<div class="fb-modal" id="fbModal"><div class="fb-content"><h3>Send Feedback</h3><input id="fbEmail" placeholder="Your email (optional)"><textarea id="fbMsg" placeholder="Share your thoughts, report a bug, or request a feature..."></textarea><div class="fb-btns"><button class="fb-cancel" onclick="closeFB()">Cancel</button><button class="fb-submit" onclick="sendFB()">Submit</button></div><div class="fb-ok" id="fbOk">✅ Thank you! Your feedback has been sent.</div></div></div>
+<script>function openFB(){document.getElementById('fbModal').classList.add('active')}function closeFB(){document.getElementById('fbModal').classList.remove('active');document.getElementById('fbMsg').value='';document.getElementById('fbEmail').value='';document.getElementById('fbOk').style.display='none'}function sendFB(){const msg=document.getElementById('fbMsg').value;if(!msg.trim()){alert('Please enter a message');return}console.log('Feedback:',{site:location.hostname,msg});document.getElementById('fbOk').style.display='block';setTimeout(closeFB,2000)}document.getElementById('fbModal').onclick=function(e){if(e.target===this)closeFB()}</script>
+</body>
+</html>

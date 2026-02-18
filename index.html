@@ -563,7 +563,7 @@
                 <p>Whether you're a creator, platform, or consumer — $TMPT makes payments better.</p>
                 
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">🎯 Buy $TMPT</a>
+                    <a href="#" class="btn btn-primary" onclick="openLaunchModal(); return false;">🎯 Buy $TMPT</a>
                     <a href="/for-platforms.html" class="btn btn-secondary">📚 Integration Docs</a>
                     <a href="/faq.html" class="btn btn-secondary">❓ FAQ</a>
                 </div>
@@ -645,5 +645,102 @@
     <!-- Uncomment and add tracking ID when ready:
     <script defer data-domain="tempttoken.com" src="https://plausible.io/js/script.js"></script>
     -->
+
+    <!-- Launch Coming Soon Modal -->
+    <div id="launchModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%); padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; border: 2px solid rgba(0, 212, 255, 0.3); box-shadow: 0 0 50px rgba(0, 212, 255, 0.2);">
+            <div style="text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 20px;">🚀</div>
+                <h2 style="background: linear-gradient(135deg, #00d4ff, #5b21b6, #d946ef); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem; margin-bottom: 15px;">Launching Soon!</h2>
+                <p style="color: #ccc; font-size: 1.1rem; margin-bottom: 25px; line-height: 1.6;">
+                    $TMPT token is currently in development. We're finalizing our Solana smart contract deployment and liquidity setup.
+                </p>
+                
+                <div style="background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 25px; text-align: left;">
+                    <h3 style="color: #00d4ff; font-size: 1.1rem; margin-bottom: 12px;">📋 Launch Checklist:</h3>
+                    <div style="color: #aaa; font-size: 0.95rem; line-height: 1.8;">
+                        <div>✅ Website deployed</div>
+                        <div>✅ Tokenomics finalized</div>
+                        <div>✅ Integration docs ready</div>
+                        <div>⏳ Smart contract deployment (in progress)</div>
+                        <div>⏳ Liquidity pool setup</div>
+                        <div>⏳ Security audit</div>
+                    </div>
+                </div>
+
+                <p style="color: #00d4ff; font-weight: 600; margin-bottom: 15px; font-size: 1.05rem;">
+                    🔔 Get notified when we launch:
+                </p>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="email" id="modalEmail" placeholder="your@email.com" style="flex: 1; padding: 12px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; font-size: 0.95rem;">
+                    <button onclick="subscribeFromModal()" style="padding: 12px 24px; background: linear-gradient(135deg, #00d4ff, #5b21b6); border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                        Subscribe
+                    </button>
+                </div>
+
+                <div id="modalSuccess" style="display: none; color: #10b981; font-weight: 600; margin-bottom: 15px;">
+                    ✅ Success! We'll notify you when $TMPT launches.
+                </div>
+
+                <button onclick="closeLaunchModal()" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    Close
+                </button>
+
+                <p style="color: #666; font-size: 0.85rem; margin-top: 20px;">
+                    Expected launch: Q1 2026 | Follow us on 
+                    <a href="https://twitter.com/TemptToken" target="_blank" style="color: #00d4ff;">Twitter</a> for updates
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openLaunchModal() {
+            document.getElementById('launchModal').style.display = 'flex';
+        }
+
+        function closeLaunchModal() {
+            document.getElementById('launchModal').style.display = 'none';
+        }
+
+        function subscribeFromModal() {
+            const email = document.getElementById('modalEmail').value;
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Save to localStorage (same as main newsletter)
+            let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+            
+            if (subscribers.some(s => s.email === email)) {
+                document.getElementById('modalSuccess').textContent = '✅ You\'re already subscribed!';
+                document.getElementById('modalSuccess').style.display = 'block';
+                return;
+            }
+
+            subscribers.push({
+                email: email,
+                date: new Date().toISOString(),
+                source: 'buy_modal'
+            });
+            localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+
+            document.getElementById('modalSuccess').style.display = 'block';
+            document.getElementById('modalEmail').value = '';
+            
+            setTimeout(() => {
+                closeLaunchModal();
+            }, 2000);
+        }
+
+        // Close modal on background click
+        document.getElementById('launchModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLaunchModal();
+            }
+        });
+    </script>
 </body>
 </html>

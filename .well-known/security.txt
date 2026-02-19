@@ -1,0 +1,18 @@
+Contact: mailto:support@tempttoken.com
+Contact: https://tempttoken.com/faq.html
+Preferred-Languages: en
+Canonical: https://tempttoken.com/.well-known/security.txt
+Policy: https://tempttoken.com/terms.html
+Acknowledgments: https://tempttoken.com/press.html
+
+# Security Disclosure Policy
+# If you discover a security vulnerability in TEMPT Token's website or API,
+# please report it responsibly to support@tempttoken.com.
+# We do not have a bug bounty program at this time, but we will acknowledge
+# responsible disclosures.
+#
+# Please do NOT publicly disclose vulnerabilities before we have had a chance
+# to address them. Allow 30 days for remediation.
+#
+# IMPORTANT: We will NEVER ask for private keys, seed phrases, or wallet access.
+# Any message claiming to be TMPT support and requesting wallet credentials is a scam.

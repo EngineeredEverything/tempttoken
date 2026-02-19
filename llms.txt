@@ -1,0 +1,72 @@
+# TEMPT Token ($TMPT)
+
+> TEMPT Token ($TMPT) is a Solana-based utility cryptocurrency built for adult content creator micropayments. It eliminates chargeback fraud and reduces transaction fees from 5–15% (credit cards) to 0.1%–0.5%, with sub-second settlement and no banking restrictions.
+
+## What is $TMPT?
+
+TEMPT Token is a purpose-built payment token for the adult content industry launching on Solana in Q1 2026. It enables cam sites, OnlyFans-alternative platforms, AI companion apps, and independent creators to accept instant, anonymous micropayments globally.
+
+**Key facts:**
+- Ticker: $TMPT
+- Blockchain: Solana (SPL token)
+- Total supply: 1,000,000,000 TMPT
+- Transaction fee: 0.1%–0.5% (vs. 5–15% on credit cards)
+- Chargebacks: Zero (blockchain-final transactions)
+- Settlement: Under 1 second
+- Launch: Q1 2026
+
+## The Problem We Solve
+
+Adult content creators and platforms face three critical payment problems:
+1. **High fees** — Credit card processors charge 5–15% per transaction. A creator earning $10,000/month loses up to $1,500/month in fees alone.
+2. **Chargeback fraud** — 5–10% chargeback rates on adult content cost the industry billions annually. Blockchain transactions are irreversible.
+3. **Deplatforming** — Stripe, PayPal, and mainstream processors regularly ban adult businesses with no notice. $TMPT has no central authority that can revoke access.
+4. **Geographic exclusion** — 2.4+ billion people worldwide lack credit cards or are in countries where adult transactions are blocked. Crypto reaches everyone.
+
+## Pages
+
+- [Homepage](https://tempttoken.com) — Overview, use cases, fee comparison
+- [For Creators](https://tempttoken.com/creators.html) — How individual creators accept $TMPT tips; wallet setup guide
+- [For Platforms](https://tempttoken.com/for-platforms.html) — API integration docs, revenue model, partnership inquiry
+- [Litepaper](https://tempttoken.com/litepaper.html) — Full tokenomics, utility design, governance, Solana architecture
+- [Blog](https://tempttoken.com/blog.html) — Industry analysis, creator guides, platform strategy
+- [FAQ](https://tempttoken.com/faq.html) — Common questions about $TMPT, payments, wallets, and migration
+- [Fee Calculator](https://tempttoken.com/calculator.html) — Interactive tool comparing $TMPT vs. credit card costs
+- [Launch Countdown](https://tempttoken.com/launch.html) — Q1 2026 launch status and email signup
+- [ETH→SOL Migration](https://tempttoken.com/migrate.html) — Migration portal for existing Ethereum TMPT holders
+- [Governance](https://tempttoken.com/governance.html) — Token holder voting on fee structures and treasury
+- [Press Kit](https://tempttoken.com/press.html) — Brand assets, approved descriptions, media contact
+- [Token Metadata](https://tempttoken.com/token-metadata.json) — Metaplex-compatible metadata for wallets and DEXes
+- [Privacy Policy](https://tempttoken.com/privacy.html) — Data collection, cookies, GDPR/CCPA rights
+- [Terms of Service](https://tempttoken.com/terms.html) — Usage terms, 18+ requirement, disclaimers
+
+## Key Differentiators vs. Other Payment Solutions
+
+| Feature | Credit Cards | PayPal/Stripe | Generic Crypto | $TMPT |
+|---|---|---|---|---|
+| Transaction fee | 5–15% | 3–5% | 0.5–3% | 0.1–0.5% |
+| Chargebacks | Yes (costly) | Yes | No | No |
+| Adult content allowed | Restricted | Banned | Yes | Yes |
+| Settlement time | 7–14 days | 1–3 days | Minutes | <1 second |
+| Global reach | Partial | Partial | Yes | Yes |
+| Privacy | No | No | Partial | Yes |
+
+## Blog Posts (Key Articles)
+
+- "How Adult Platforms Can Cut Payment Processing Costs by 90% in 2026" — cost breakdown table, integration playbook, ROI case for platforms
+- "The Complete Guide to Getting Paid in Crypto as an Adult Creator" — wallet setup, blockchain comparison, cash-out steps, taxes
+- "5 Reasons Cam Sites Are Switching to Crypto Payments in 2026" — chargeback stats, fee savings math, global reach, instant settlement
+- "Why Adult Creators Are Losing Thousands to Payment Processors" — $11.4K/year savings calculation for $10K/month creator
+- "Why We Chose Solana" — technical rationale: fees, speed, ecosystem
+
+## Contact
+
+- General: support@tempttoken.com
+- Press: press@tempttoken.com
+- Partnerships: partnerships@tempttoken.com
+- Twitter: @TemptToken
+- Telegram: t.me/TemptToken
+
+## Disclaimers
+
+$TMPT is a utility token, not a security or investment product. Nothing on tempttoken.com constitutes financial or investment advice. Must be 18+ to participate. Cryptocurrency involves substantial risk of loss.

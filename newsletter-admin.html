@@ -4,191 +4,261 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newsletter Subscribers - TEMPT Admin</title>
+    <meta name="robots" content="noindex, nofollow">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Space Grotesk', sans-serif; }
-    </style>
+    <style>body { font-family: 'Space Grotesk', sans-serif; }</style>
 </head>
 <body class="bg-gray-950 text-white min-h-screen">
-    <div class="container mx-auto px-6 py-12 max-w-4xl">
+    <!-- Auth Gate -->
+    <div id="authGate" class="flex items-center justify-center min-h-screen">
+        <div class="bg-gray-900 p-10 rounded-2xl border border-gray-800 w-full max-w-sm">
+            <h1 class="text-2xl font-bold mb-2 text-center">🔐 Admin Login</h1>
+            <p class="text-gray-400 text-sm text-center mb-6">Enter admin key to view subscribers</p>
+            <input type="password" id="adminKeyInput" placeholder="Admin key..."
+                class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white mb-4 focus:outline-none focus:border-purple-500"
+                onkeydown="if(event.key==='Enter') login()">
+            <button onclick="login()" class="w-full bg-purple-600 hover:bg-purple-700 py-3 rounded-xl font-semibold transition">
+                Access Dashboard
+            </button>
+            <p id="authError" class="mt-3 text-red-400 text-sm text-center hidden">Invalid key. Try again.</p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (hidden until auth) -->
+    <div id="dashboard" class="hidden container mx-auto px-6 py-12 max-w-4xl">
         <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-4xl font-bold mb-2">📧 Newsletter Subscribers</h1>
-            <p class="text-gray-400">View and manage email signups for $TMPT launch notifications</p>
+        <div class="mb-8 flex items-center justify-between">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">📧 Subscriber Dashboard</h1>
+                <p class="text-gray-400">Server-side storage — all signups persist across browsers</p>
+            </div>
+            <button onclick="logout()" class="text-gray-500 hover:text-gray-300 text-sm transition">Logout</button>
         </div>
 
         <!-- Stats -->
         <div class="grid md:grid-cols-3 gap-6 mb-8">
             <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                <div class="text-3xl font-bold text-purple-400" id="totalCount">0</div>
+                <div class="text-3xl font-bold text-purple-400" id="totalCount">—</div>
                 <p class="text-gray-400 mt-1">Total Subscribers</p>
             </div>
             <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                <div class="text-3xl font-bold text-green-400" id="todayCount">0</div>
+                <div class="text-3xl font-bold text-green-400" id="todayCount">—</div>
                 <p class="text-gray-400 mt-1">Added Today</p>
             </div>
             <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                <div class="text-3xl font-bold text-blue-400" id="weekCount">0</div>
+                <div class="text-3xl font-bold text-blue-400" id="weekCount">—</div>
                 <p class="text-gray-400 mt-1">This Week</p>
             </div>
         </div>
 
         <!-- Export Options -->
         <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 mb-8">
-            <h2 class="text-xl font-semibold mb-4">Export Subscribers</h2>
-            <div class="flex gap-4">
+            <h2 class="text-xl font-semibold mb-4">Export</h2>
+            <div class="flex gap-4 flex-wrap">
                 <button onclick="exportCSV()" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-semibold transition">
                     📥 Download CSV
                 </button>
                 <button onclick="copyEmails()" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold transition">
                     📋 Copy Emails
                 </button>
-                <button onclick="clearAll()" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-semibold transition ml-auto">
-                    🗑️ Clear All
+                <button onclick="loadSubscribers()" class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold transition">
+                    🔄 Refresh
                 </button>
             </div>
             <p id="exportMessage" class="mt-4 text-green-400 font-semibold hidden"></p>
         </div>
 
+        <!-- Source Breakdown -->
+        <div class="bg-gray-900 p-6 rounded-xl border border-gray-800 mb-8" id="sourceBreakdown"></div>
+
         <!-- Subscriber List -->
         <div class="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
-            <div class="p-6 border-b border-gray-800">
+            <div class="p-6 border-b border-gray-800 flex items-center justify-between">
                 <h2 class="text-xl font-semibold">Subscriber List</h2>
+                <span id="listMeta" class="text-gray-500 text-sm"></span>
             </div>
             <div class="divide-y divide-gray-800" id="subscriberList">
-                <div class="p-8 text-center text-gray-500">
-                    Loading subscribers...
-                </div>
+                <div class="p-8 text-center text-gray-500">Loading…</div>
             </div>
         </div>
 
-        <!-- Integration Guide -->
-        <div class="mt-8 bg-blue-900/20 border border-blue-800 rounded-xl p-6">
-            <h3 class="text-lg font-semibold mb-3">🔗 Next Steps: Email Service Integration</h3>
-            <p class="text-gray-300 mb-4">Currently, emails are stored in browser localStorage (temporary). To send actual emails, integrate with:</p>
-            <ul class="list-disc list-inside space-y-2 text-gray-400">
-                <li><strong>Mailchimp</strong> - $13/month for 500 subscribers (industry standard)</li>
-                <li><strong>ConvertKit</strong> - $9/month for 300 subscribers (creator-focused)</li>
-                <li><strong>EmailOctopus</strong> - $8/month for 500 subscribers (budget-friendly)</li>
-                <li><strong>Custom Serverless Function</strong> - Free tier on Vercel/Netlify + email API</li>
-            </ul>
-            <p class="text-gray-400 mt-4">To integrate, update the form submission code in <code class="bg-gray-800 px-2 py-1 rounded">index.html</code> to POST to your chosen service's API.</p>
-        </div>
-
-        <!-- Back Link -->
         <div class="mt-8 text-center">
             <a href="index.html" class="text-purple-400 hover:text-purple-300 transition">← Back to Homepage</a>
         </div>
     </div>
 
     <script>
-        // Load subscribers from localStorage
-        function loadSubscribers() {
-            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
-            const listElement = document.getElementById('subscriberList');
-            
-            if (subscribers.length === 0) {
-                listElement.innerHTML = '<div class="p-8 text-center text-gray-500">No subscribers yet. Share the homepage to get signups!</div>';
+        let ADMIN_KEY = '';
+        let allSubscribers = [];
+
+        function login() {
+            const key = document.getElementById('adminKeyInput').value.trim();
+            if (!key) return;
+            ADMIN_KEY = key;
+            loadSubscribers();
+        }
+
+        function logout() {
+            ADMIN_KEY = '';
+            allSubscribers = [];
+            document.getElementById('authGate').classList.remove('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('adminKeyInput').value = '';
+        }
+
+        async function loadSubscribers() {
+            try {
+                const res = await fetch('/api/admin/subscribers', {
+                    headers: { 'X-Admin-Key': ADMIN_KEY }
+                });
+
+                if (res.status === 401) {
+                    document.getElementById('authError').classList.remove('hidden');
+                    ADMIN_KEY = '';
+                    return;
+                }
+
+                const data = await res.json();
+                allSubscribers = data.subscribers || [];
+
+                // Show dashboard
+                document.getElementById('authGate').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                document.getElementById('authError').classList.add('hidden');
+
+                renderStats();
+                renderSourceBreakdown();
+                renderList();
+
+            } catch (err) {
+                alert('Failed to load: ' + err.message);
+            }
+        }
+
+        function renderStats() {
+            const now = new Date();
+            const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const weekStart = new Date(todayStart - 6 * 86400000);
+
+            const today = allSubscribers.filter(s => new Date(s.subscribedAt) >= todayStart).length;
+            const week = allSubscribers.filter(s => new Date(s.subscribedAt) >= weekStart).length;
+
+            document.getElementById('totalCount').textContent = allSubscribers.length;
+            document.getElementById('todayCount').textContent = today;
+            document.getElementById('weekCount').textContent = week;
+            document.getElementById('listMeta').textContent = `${allSubscribers.length} total`;
+        }
+
+        function renderSourceBreakdown() {
+            const sources = {};
+            allSubscribers.forEach(s => { sources[s.source || 'unknown'] = (sources[s.source || 'unknown'] || 0) + 1; });
+            const entries = Object.entries(sources).sort((a, b) => b[1] - a[1]);
+
+            if (!entries.length) {
+                document.getElementById('sourceBreakdown').classList.add('hidden');
                 return;
             }
-            
-            // Display subscribers
-            listElement.innerHTML = subscribers.map((email, index) => `
-                <div class="p-4 hover:bg-gray-800 transition flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <div class="text-gray-500 font-mono text-sm">#${index + 1}</div>
-                        <div class="text-white">${email}</div>
+
+            document.getElementById('sourceBreakdown').innerHTML = `
+                <h2 class="text-xl font-semibold mb-4">Signup Sources</h2>
+                <div class="flex flex-wrap gap-3">
+                    ${entries.map(([src, count]) => `
+                        <div class="bg-gray-800 px-4 py-2 rounded-lg text-sm">
+                            <span class="text-white font-semibold">${count}</span>
+                            <span class="text-gray-400 ml-1">${src}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderList() {
+            const listElement = document.getElementById('subscriberList');
+            if (!allSubscribers.length) {
+                listElement.innerHTML = '<div class="p-8 text-center text-gray-500">No subscribers yet.</div>';
+                return;
+            }
+
+            const sorted = [...allSubscribers].sort((a, b) => new Date(b.subscribedAt) - new Date(a.subscribedAt));
+            listElement.innerHTML = sorted.map((sub, i) => `
+                <div class="p-4 hover:bg-gray-800 transition flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4 min-w-0">
+                        <div class="text-gray-600 font-mono text-xs w-6">#${i + 1}</div>
+                        <div>
+                            <div class="text-white font-medium">${sub.email}</div>
+                            <div class="text-gray-500 text-xs mt-0.5">
+                                ${sub.source || 'unknown'} · ${formatDate(sub.subscribedAt)}
+                                ${sub.name ? ' · ' + sub.name : ''}
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="removeSubscriber('${email}')" class="text-red-400 hover:text-red-300 text-sm">
+                    <button onclick="removeSubscriber('${sub.email}')"
+                        class="text-red-500 hover:text-red-300 text-xs shrink-0 transition">
                         Remove
                     </button>
                 </div>
             `).join('');
-            
-            // Update stats
-            document.getElementById('totalCount').textContent = subscribers.length;
-            // Note: today/week counts would require timestamp tracking (enhancement for later)
-            document.getElementById('todayCount').textContent = '-';
-            document.getElementById('weekCount').textContent = '-';
         }
 
-        // Export as CSV
-        function exportCSV() {
-            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
-            if (subscribers.length === 0) {
-                alert('No subscribers to export');
-                return;
+        function formatDate(iso) {
+            const d = new Date(iso);
+            return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) +
+                   ' ' + d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        async function removeSubscriber(email) {
+            if (!confirm('Remove ' + email + '?')) return;
+            try {
+                const res = await fetch('/api/admin/subscribers/' + encodeURIComponent(email), {
+                    method: 'DELETE',
+                    headers: { 'X-Admin-Key': ADMIN_KEY }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    allSubscribers = allSubscribers.filter(s => s.email !== email);
+                    renderStats();
+                    renderSourceBreakdown();
+                    renderList();
+                    showMessage('✅ Removed ' + email);
+                }
+            } catch (err) {
+                alert('Failed to remove: ' + err.message);
             }
-            
-            const csv = 'Email\n' + subscribers.join('\n');
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
+        }
+
+        function exportCSV() {
+            if (!allSubscribers.length) { alert('No subscribers to export.'); return; }
+            const header = 'Email,Name,Source,Date\n';
+            const rows = allSubscribers.map(s =>
+                `"${s.email}","${s.name || ''}","${s.source || ''}","${s.subscribedAt}"`
+            ).join('\n');
+            const blob = new Blob([header + rows], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
             a.download = 'tmpt-subscribers-' + new Date().toISOString().split('T')[0] + '.csv';
             a.click();
-            
-            showMessage('✅ CSV downloaded successfully!');
+            showMessage('✅ CSV downloaded!');
         }
 
-        // Copy emails to clipboard
         function copyEmails() {
-            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
-            if (subscribers.length === 0) {
-                alert('No subscribers to copy');
-                return;
-            }
-            
-            const emails = subscribers.join(', ');
+            if (!allSubscribers.length) { alert('No subscribers.'); return; }
+            const emails = allSubscribers.map(s => s.email).join(', ');
             navigator.clipboard.writeText(emails).then(() => {
-                showMessage('✅ ' + subscribers.length + ' emails copied to clipboard!');
-            }).catch(() => {
-                alert('Failed to copy. Please try again.');
-            });
+                showMessage('✅ ' + allSubscribers.length + ' emails copied!');
+            }).catch(() => alert('Copy failed. Check browser permissions.'));
         }
 
-        // Remove subscriber
-        function removeSubscriber(email) {
-            if (!confirm('Remove ' + email + ' from the list?')) return;
-            
-            let subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
-            subscribers = subscribers.filter(e => e !== email);
-            localStorage.setItem('tmpt_subscribers', JSON.stringify(subscribers));
-            loadSubscribers();
-            showMessage('✅ Subscriber removed');
-        }
-
-        // Clear all subscribers
-        function clearAll() {
-            const subscribers = JSON.parse(localStorage.getItem('tmpt_subscribers') || '[]');
-            if (subscribers.length === 0) {
-                alert('No subscribers to clear');
-                return;
-            }
-            
-            if (!confirm('Are you sure you want to delete ALL ' + subscribers.length + ' subscribers? This cannot be undone!')) return;
-            
-            localStorage.removeItem('tmpt_subscribers');
-            loadSubscribers();
-            showMessage('✅ All subscribers cleared');
-        }
-
-        // Show message
         function showMessage(msg) {
-            const msgElement = document.getElementById('exportMessage');
-            msgElement.textContent = msg;
-            msgElement.classList.remove('hidden');
-            setTimeout(() => {
-                msgElement.classList.add('hidden');
-            }, 3000);
+            const el = document.getElementById('exportMessage');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 3000);
         }
 
-        // Load on page load
-        loadSubscribers();
-
-        // Auto-refresh every 30 seconds (in case multiple tabs open)
-        setInterval(loadSubscribers, 30000);
+        // Focus the key input
+        document.getElementById('adminKeyInput').focus();
     </script>
 </body>
 </html>

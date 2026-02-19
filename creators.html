@@ -548,22 +548,55 @@
             }
         }
 
-        function joinWaitlist(e) {
+        async function joinWaitlist(e) {
             e.preventDefault();
             const email = document.getElementById('waitlist-email').value.trim().toLowerCase();
             if (!email) return;
-            const key = 'tmpt_newsletter_subscribers';
-            let subs = JSON.parse(localStorage.getItem(key) || '[]');
-            const existing = subs.find(s => s.email === email);
-            if (existing) {
-                document.getElementById('waitlist-duplicate').classList.remove('hidden');
-                document.getElementById('waitlist-success').classList.add('hidden');
-            } else {
-                subs.push({ email, date: new Date().toISOString(), source: 'creators_waitlist' });
-                localStorage.setItem(key, JSON.stringify(subs));
-                document.getElementById('waitlist-success').classList.remove('hidden');
-                document.getElementById('waitlist-duplicate').classList.add('hidden');
-                document.getElementById('waitlist-email').value = '';
+
+            const btn = e.target.querySelector('button[type="submit"]') || e.target;
+            if (btn) btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, source: 'creators_waitlist' })
+                });
+                const data = await res.json();
+
+                // Also save locally as fallback
+                const key = 'tmpt_newsletter_subscribers';
+                let subs = JSON.parse(localStorage.getItem(key) || '[]');
+                if (!subs.find(s => s.email === email)) {
+                    subs.push({ email, date: new Date().toISOString(), source: 'creators_waitlist' });
+                    localStorage.setItem(key, JSON.stringify(subs));
+                }
+
+                if (data.duplicate) {
+                    document.getElementById('waitlist-duplicate').classList.remove('hidden');
+                    document.getElementById('waitlist-success').classList.add('hidden');
+                } else {
+                    document.getElementById('waitlist-success').classList.remove('hidden');
+                    document.getElementById('waitlist-duplicate').classList.add('hidden');
+                    document.getElementById('waitlist-email').value = '';
+                }
+            } catch (err) {
+                // Fallback: localStorage only
+                const key = 'tmpt_newsletter_subscribers';
+                let subs = JSON.parse(localStorage.getItem(key) || '[]');
+                const existing = subs.find(s => s.email === email);
+                if (existing) {
+                    document.getElementById('waitlist-duplicate').classList.remove('hidden');
+                    document.getElementById('waitlist-success').classList.add('hidden');
+                } else {
+                    subs.push({ email, date: new Date().toISOString(), source: 'creators_waitlist' });
+                    localStorage.setItem(key, JSON.stringify(subs));
+                    document.getElementById('waitlist-success').classList.remove('hidden');
+                    document.getElementById('waitlist-duplicate').classList.add('hidden');
+                    document.getElementById('waitlist-email').value = '';
+                }
+            } finally {
+                if (btn) btn.disabled = false;
             }
         }
     </script>

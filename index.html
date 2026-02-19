@@ -768,35 +768,52 @@
             document.getElementById('launchModal').style.display = 'none';
         }
 
-        function subscribeFromModal() {
-            const email = document.getElementById('modalEmail').value;
+        async function subscribeFromModal() {
+            const email = document.getElementById('modalEmail').value.trim().toLowerCase();
             if (!email || !email.includes('@')) {
                 alert('Please enter a valid email address');
                 return;
             }
 
-            // Save to localStorage (same as main newsletter)
-            let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
-            
-            if (subscribers.some(s => s.email === email)) {
-                document.getElementById('modalSuccess').textContent = '✅ You\'re already subscribed!';
+            const btn = document.querySelector('#launchModal button[onclick]');
+            if (btn) btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, source: 'buy_modal' })
+                });
+                const data = await res.json();
+
+                // Also save locally as fallback
+                let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+                if (!subscribers.some(s => s.email === email)) {
+                    subscribers.push({ email, date: new Date().toISOString(), source: 'buy_modal' });
+                    localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+                }
+
+                document.getElementById('modalSuccess').textContent = data.duplicate
+                    ? '✅ You\'re already on the list!'
+                    : (data.message || '🎉 You\'re on the list!');
                 document.getElementById('modalSuccess').style.display = 'block';
-                return;
+                document.getElementById('modalEmail').value = '';
+
+                setTimeout(() => { closeLaunchModal(); }, 2500);
+            } catch (err) {
+                // Fallback to localStorage only
+                let subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+                if (!subscribers.some(s => s.email === email)) {
+                    subscribers.push({ email, date: new Date().toISOString(), source: 'buy_modal' });
+                    localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+                }
+                document.getElementById('modalSuccess').textContent = '🎉 You\'re on the list!';
+                document.getElementById('modalSuccess').style.display = 'block';
+                document.getElementById('modalEmail').value = '';
+                setTimeout(() => { closeLaunchModal(); }, 2500);
+            } finally {
+                if (btn) btn.disabled = false;
             }
-
-            subscribers.push({
-                email: email,
-                date: new Date().toISOString(),
-                source: 'buy_modal'
-            });
-            localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
-
-            document.getElementById('modalSuccess').style.display = 'block';
-            document.getElementById('modalEmail').value = '';
-            
-            setTimeout(() => {
-                closeLaunchModal();
-            }, 2000);
         }
 
         // Close modal on background click

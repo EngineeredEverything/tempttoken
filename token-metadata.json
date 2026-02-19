@@ -1,0 +1,30 @@
+{
+  "name": "TEMPT Token",
+  "symbol": "TMPT",
+  "description": "TEMPT Token ($TMPT) is a Solana-based utility cryptocurrency built for adult content creator micropayments. Zero chargebacks, 0.1% transaction fees, instant settlements, and global reach — without banks or payment processors.",
+  "image": "https://tempttoken.com/tmpt-logo.png",
+  "external_url": "https://tempttoken.com",
+  "attributes": [
+    { "trait_type": "Category", "value": "Utility Token" },
+    { "trait_type": "Blockchain", "value": "Solana" },
+    { "trait_type": "Standard", "value": "SPL Token" },
+    { "trait_type": "Decimals", "value": "9" },
+    { "trait_type": "Total Supply", "value": "1,000,000,000" },
+    { "trait_type": "Use Case", "value": "Adult Content Micropayments" }
+  ],
+  "properties": {
+    "category": "utility",
+    "links": {
+      "website": "https://tempttoken.com",
+      "twitter": "https://twitter.com/TemptToken",
+      "telegram": "https://t.me/TemptToken",
+      "discord": "https://discord.gg/tempttoken"
+    },
+    "creators": []
+  },
+  "extensions": {
+    "website": "https://tempttoken.com",
+    "bridgeContract": null,
+    "coingeckoId": null
+  }
+}

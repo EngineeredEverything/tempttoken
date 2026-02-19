@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMPT Admin Dashboard</title>
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; background: #030712; }
+        .gradient-text { background: linear-gradient(135deg, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-bg { background: linear-gradient(135deg, #7c3aed, #db2777); }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; }
+        .tab-btn { padding: 10px 24px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; cursor: pointer; }
+        .tab-btn.active { background: linear-gradient(135deg, #7c3aed, #db2777); color: white; }
+        .tab-btn:not(.active) { color: #9ca3af; }
+        .tab-btn:not(.active):hover { color: white; background: rgba(255,255,255,0.05); }
+        .status-pill { display: inline-block; padding: 2px 10px; border-radius: 50px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .status-pending { background: rgba(234,179,8,0.15); color: #fbbf24; border: 1px solid rgba(234,179,8,0.3); }
+        .status-verified { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+        .status-airdropped { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+        input:focus { outline: none; border-color: #7c3aed !important; }
+        .mono { font-family: 'Courier New', monospace; font-size: 0.78rem; }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+
+    <!-- Auth Gate -->
+    <div id="authGate" class="flex items-center justify-center min-h-screen px-4">
+        <div class="card p-10 w-full max-w-sm">
+            <h1 class="text-2xl font-bold mb-1 text-center gradient-text">$TMPT Admin</h1>
+            <p class="text-gray-500 text-sm text-center mb-7">Enter your admin key to continue</p>
+            <input type="password" id="adminKeyInput" placeholder="Admin key..."
+                class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white mb-4 focus:outline-none"
+                onkeydown="if(event.key==='Enter') login()">
+            <button onclick="login()" class="w-full gradient-bg py-3 rounded-xl font-bold transition hover:opacity-90">
+                Access Dashboard
+            </button>
+            <p id="authError" class="text-red-400 text-xs text-center mt-3 hidden">Invalid key — try again.</p>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
+        <!-- Top nav -->
+        <div style="background: rgba(3,7,18,0.95); border-bottom: 1px solid rgba(255,255,255,0.07);" class="sticky top-0 z-50 px-6 py-4">
+            <div class="max-w-6xl mx-auto flex items-center justify-between">
+                <span class="font-bold text-lg gradient-text">$TMPT Admin</span>
+                <div class="flex items-center gap-4">
+                    <span id="lastRefresh" class="text-gray-600 text-xs"></span>
+                    <button onclick="refreshAll()" class="text-gray-500 hover:text-white text-sm transition">↺ Refresh</button>
+                    <a href="/" class="text-gray-500 hover:text-white text-sm transition">← Site</a>
+                    <button onclick="logout()" class="text-gray-600 hover:text-red-400 text-sm transition">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 py-10 space-y-8">
+
+            <!-- KPI row -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="card p-5 text-center">
+                    <div class="text-3xl font-bold text-purple-400" id="kpiSubscribers">—</div>
+                    <div class="text-gray-500 text-xs mt-1">Subscribers</div>
+                </div>
+                <div class="card p-5 text-center">
+                    <div class="text-3xl font-bold text-cyan-400" id="kpiMigrations">—</div>
+                    <div class="text-gray-500 text-xs mt-1">Migration Regs</div>
+                </div>
+                <div class="card p-5 text-center">
+                    <div class="text-3xl font-bold text-yellow-400" id="kpiPending">—</div>
+                    <div class="text-gray-500 text-xs mt-1">Pending</div>
+                </div>
+                <div class="card p-5 text-center">
+                    <div class="text-3xl font-bold text-blue-400" id="kpiVerified">—</div>
+                    <div class="text-gray-500 text-xs mt-1">Verified</div>
+                </div>
+                <div class="card p-5 text-center">
+                    <div class="text-3xl font-bold text-green-400" id="kpiAirdropped">—</div>
+                    <div class="text-gray-500 text-xs mt-1">Airdropped</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex gap-2">
+                <button class="tab-btn active" id="tabSubs" onclick="switchTab('subs')">
+                    📧 Subscribers
+                </button>
+                <button class="tab-btn" id="tabMigs" onclick="switchTab('migs')">
+                    🔄 Migrations
+                </button>
+            </div>
+
+            <!-- ── Subscribers Tab ───────────────────────────────────────── -->
+            <div id="panelSubs">
+                <!-- Actions -->
+                <div class="card p-5 mb-5 flex flex-wrap items-center gap-3">
+                    <button onclick="exportSubCSV()" class="bg-purple-700 hover:bg-purple-600 px-5 py-2 rounded-lg text-sm font-semibold transition">📥 Export CSV</button>
+                    <button onclick="copySubEmails()" class="bg-gray-800 hover:bg-gray-700 px-5 py-2 rounded-lg text-sm font-semibold transition">📋 Copy Emails</button>
+                    <span id="subMsg" class="text-green-400 text-sm font-semibold hidden"></span>
+                </div>
+
+                <!-- Source breakdown -->
+                <div id="subSources" class="card p-5 mb-5 hidden">
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mb-3 font-semibold">Signup Sources</div>
+                    <div id="subSourcesInner" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- List -->
+                <div class="card overflow-hidden">
+                    <div id="subList" class="divide-y divide-white/5">
+                        <div class="p-8 text-center text-gray-600">Loading…</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Migrations Tab ────────────────────────────────────────── -->
+            <div id="panelMigs" class="hidden">
+                <!-- Actions -->
+                <div class="card p-5 mb-5 flex flex-wrap items-center gap-3">
+                    <button onclick="exportMigCSV()" class="bg-cyan-800 hover:bg-cyan-700 px-5 py-2 rounded-lg text-sm font-semibold transition">📥 Export CSV</button>
+                    <button onclick="filterMigs('all')" id="filterAll" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-semibold transition">All</button>
+                    <button onclick="filterMigs('pending')" id="filterPending" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">Pending</button>
+                    <button onclick="filterMigs('verified')" id="filterVerified" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">Verified</button>
+                    <button onclick="filterMigs('airdropped')" id="filterAirdropped" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">Airdropped</button>
+                    <span id="migMsg" class="text-green-400 text-sm font-semibold hidden"></span>
+                </div>
+
+                <!-- List -->
+                <div class="card overflow-hidden">
+                    <div id="migList" class="divide-y divide-white/5">
+                        <div class="p-8 text-center text-gray-600">Loading…</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let ADMIN_KEY = '';
+        let allSubs = [];
+        let allMigs = [];
+        let migFilter = 'all';
+
+        // ── Auth ─────────────────────────────────────────────────────────
+        async function login() {
+            const key = document.getElementById('adminKeyInput').value.trim();
+            if (!key) return;
+            ADMIN_KEY = key;
+            await refreshAll();
+        }
+
+        function logout() {
+            ADMIN_KEY = ''; allSubs = []; allMigs = [];
+            document.getElementById('authGate').classList.remove('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('adminKeyInput').value = '';
+        }
+
+        // ── Tabs ─────────────────────────────────────────────────────────
+        function switchTab(tab) {
+            document.getElementById('panelSubs').classList.toggle('hidden', tab !== 'subs');
+            document.getElementById('panelMigs').classList.toggle('hidden', tab !== 'migs');
+            document.getElementById('tabSubs').classList.toggle('active', tab === 'subs');
+            document.getElementById('tabMigs').classList.toggle('active', tab === 'migs');
+        }
+
+        // ── Data ─────────────────────────────────────────────────────────
+        async function refreshAll() {
+            const [subsOk, migsOk] = await Promise.all([loadSubs(), loadMigs()]);
+            if (!subsOk && !migsOk) {
+                document.getElementById('authError').classList.remove('hidden');
+                ADMIN_KEY = '';
+                return;
+            }
+            document.getElementById('authGate').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('authError').classList.add('hidden');
+            document.getElementById('lastRefresh').textContent = 'Refreshed ' + new Date().toLocaleTimeString();
+            renderKPIs();
+            renderSubs();
+            renderMigs();
+        }
+
+        async function loadSubs() {
+            try {
+                const res = await fetch('/api/admin/subscribers', { headers: { 'X-Admin-Key': ADMIN_KEY } });
+                if (res.status === 401) return false;
+                const data = await res.json();
+                allSubs = data.subscribers || [];
+                return true;
+            } catch { return false; }
+        }
+
+        async function loadMigs() {
+            try {
+                const res = await fetch('/api/admin/migrations', { headers: { 'X-Admin-Key': ADMIN_KEY } });
+                if (res.status === 401) return false;
+                const data = await res.json();
+                allMigs = data.registrations || [];
+                return true;
+            } catch { return false; }
+        }
+
+        // ── KPIs ─────────────────────────────────────────────────────────
+        function renderKPIs() {
+            document.getElementById('kpiSubscribers').textContent = allSubs.length;
+            document.getElementById('kpiMigrations').textContent = allMigs.length;
+            document.getElementById('kpiPending').textContent = allMigs.filter(m => m.status === 'pending').length;
+            document.getElementById('kpiVerified').textContent = allMigs.filter(m => m.status === 'verified').length;
+            document.getElementById('kpiAirdropped').textContent = allMigs.filter(m => m.status === 'airdropped').length;
+        }
+
+        // ── Subscribers ───────────────────────────────────────────────────
+        function renderSubs() {
+            const sorted = [...allSubs].sort((a, b) => new Date(b.subscribedAt) - new Date(a.subscribedAt));
+            const el = document.getElementById('subList');
+
+            // Sources
+            const sources = {};
+            allSubs.forEach(s => { sources[s.source || 'unknown'] = (sources[s.source || 'unknown'] || 0) + 1; });
+            const srcEntries = Object.entries(sources).sort((a, b) => b[1] - a[1]);
+            const srcPanel = document.getElementById('subSources');
+            if (srcEntries.length) {
+                srcPanel.classList.remove('hidden');
+                document.getElementById('subSourcesInner').innerHTML = srcEntries.map(([src, n]) =>
+                    `<span class="bg-gray-800 px-3 py-1 rounded-full text-xs"><strong>${n}</strong> <span class="text-gray-400">${src}</span></span>`
+                ).join('');
+            }
+
+            if (!sorted.length) {
+                el.innerHTML = '<div class="p-8 text-center text-gray-600">No subscribers yet.</div>';
+                return;
+            }
+            el.innerHTML = sorted.map((s, i) => `
+                <div class="px-6 py-4 hover:bg-white/[0.02] flex items-center gap-4">
+                    <span class="text-gray-700 text-xs w-6">${i + 1}</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-medium truncate">${s.email}</div>
+                        <div class="text-gray-600 text-xs mt-0.5">${s.source || 'unknown'} · ${fmt(s.subscribedAt)}</div>
+                    </div>
+                    <button onclick="removeSub('${s.email}')" class="text-gray-700 hover:text-red-400 text-xs transition shrink-0">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        async function removeSub(email) {
+            if (!confirm('Remove ' + email + '?')) return;
+            try {
+                await fetch('/api/admin/subscribers/' + encodeURIComponent(email), {
+                    method: 'DELETE', headers: { 'X-Admin-Key': ADMIN_KEY }
+                });
+                allSubs = allSubs.filter(s => s.email !== email);
+                renderKPIs(); renderSubs();
+                showMsg('subMsg', '✅ Removed ' + email);
+            } catch (e) { alert('Error: ' + e.message); }
+        }
+
+        function exportSubCSV() {
+            if (!allSubs.length) { alert('No subscribers.'); return; }
+            const rows = allSubs.map(s => `"${s.email}","${s.name || ''}","${s.source || ''}","${s.subscribedAt}"`);
+            dl('Email,Name,Source,Date\n' + rows.join('\n'), 'tmpt-subscribers-' + today() + '.csv', 'text/csv');
+            showMsg('subMsg', '✅ Downloaded!');
+        }
+
+        function copySubEmails() {
+            if (!allSubs.length) { alert('No subscribers.'); return; }
+            navigator.clipboard.writeText(allSubs.map(s => s.email).join(', '))
+                .then(() => showMsg('subMsg', '✅ ' + allSubs.length + ' emails copied!'))
+                .catch(() => alert('Copy failed.'));
+        }
+
+        // ── Migrations ────────────────────────────────────────────────────
+        function filterMigs(f) {
+            migFilter = f;
+            ['All','Pending','Verified','Airdropped'].forEach(x => {
+                const btn = document.getElementById('filter' + x);
+                if (btn) {
+                    btn.className = (f === x.toLowerCase() || (f === 'all' && x === 'All'))
+                        ? 'bg-cyan-800 hover:bg-cyan-700 px-4 py-2 rounded-lg text-sm font-semibold transition'
+                        : 'bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition';
+                }
+            });
+            renderMigs();
+        }
+
+        function renderMigs() {
+            const filtered = migFilter === 'all' ? allMigs : allMigs.filter(m => m.status === migFilter);
+            const sorted = [...filtered].sort((a, b) => new Date(b.registeredAt) - new Date(a.registeredAt));
+            const el = document.getElementById('migList');
+            if (!sorted.length) {
+                el.innerHTML = '<div class="p-8 text-center text-gray-600">No registrations' + (migFilter !== 'all' ? ' with status: ' + migFilter : '') + '.</div>';
+                return;
+            }
+            el.innerHTML = sorted.map((m, i) => `
+                <div class="px-5 py-4 hover:bg-white/[0.02]">
+                    <div class="flex items-start gap-4">
+                        <span class="text-gray-700 text-xs w-6 mt-1">${i + 1}</span>
+                        <div class="flex-1 min-w-0 space-y-1">
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="status-pill status-${m.status}">${m.status}</span>
+                                ${m.email ? `<span class="text-gray-400 text-xs">${m.email}</span>` : ''}
+                                <span class="text-gray-600 text-xs ml-auto">${fmt(m.registeredAt)}</span>
+                            </div>
+                            <div class="mono text-gray-300 truncate" title="${m.ethAddress}">
+                                <span class="text-gray-600">ETH</span> ${m.ethAddress}
+                            </div>
+                            <div class="mono text-gray-300 truncate" title="${m.solAddress}">
+                                <span class="text-gray-600">SOL</span> ${m.solAddress}
+                            </div>
+                            ${m.selfReportedBalance ? `<div class="text-gray-600 text-xs">Self-reported: ${Number(m.selfReportedBalance).toLocaleString()} TMPT</div>` : ''}
+                            ${m.verifiedBalance !== undefined ? `<div class="text-blue-400 text-xs">Verified: ${Number(m.verifiedBalance).toLocaleString()} TMPT</div>` : ''}
+                            ${m.txHash ? `<div class="text-green-400 text-xs mono">tx: ${m.txHash}</div>` : ''}
+                        </div>
+                        <div class="flex flex-col gap-2 shrink-0">
+                            ${m.status === 'pending' ? `<button onclick="updateMig('${m.id}','verified')" class="text-blue-400 hover:text-blue-300 text-xs transition whitespace-nowrap">Mark Verified</button>` : ''}
+                            ${m.status === 'verified' ? `<button onclick="promptAirdrop('${m.id}')" class="text-green-400 hover:text-green-300 text-xs transition whitespace-nowrap">Mark Airdropped</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function updateMig(id, status, extra) {
+            try {
+                const body = { status, ...extra };
+                const res = await fetch('/api/admin/migrations/' + id, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json', 'X-Admin-Key': ADMIN_KEY },
+                    body: JSON.stringify(body)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const idx = allMigs.findIndex(m => m.id === id);
+                    if (idx !== -1) allMigs[idx] = data.registration;
+                    renderKPIs(); renderMigs();
+                    showMsg('migMsg', '✅ Updated to ' + status);
+                }
+            } catch (e) { alert('Error: ' + e.message); }
+        }
+
+        function promptAirdrop(id) {
+            const txHash = prompt('Enter Solana transaction hash for this airdrop:');
+            if (txHash === null) return;
+            updateMig(id, 'airdropped', txHash ? { txHash } : {});
+        }
+
+        function exportMigCSV() {
+            if (!allMigs.length) { alert('No registrations.'); return; }
+            const rows = allMigs.map(m =>
+                `"${m.ethAddress}","${m.solAddress}","${m.email || ''}","${m.status}","${m.selfReportedBalance || ''}","${m.verifiedBalance || ''}","${m.txHash || ''}","${m.registeredAt}"`
+            );
+            dl('ETH Address,SOL Address,Email,Status,Self-Reported Balance,Verified Balance,TX Hash,Registered At\n' + rows.join('\n'),
+               'tmpt-migrations-' + today() + '.csv', 'text/csv');
+            showMsg('migMsg', '✅ Downloaded!');
+        }
+
+        // ── Utilities ─────────────────────────────────────────────────────
+        function fmt(iso) {
+            if (!iso) return '—';
+            const d = new Date(iso);
+            return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) +
+                   ' ' + d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function today() { return new Date().toISOString().split('T')[0]; }
+
+        function dl(content, filename, type) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([content], { type }));
+            a.download = filename;
+            a.click();
+        }
+
+        function showMsg(id, msg) {
+            const el = document.getElementById(id);
+            el.textContent = msg;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 3000);
+        }
+
+        // Auto-refresh every 60s
+        setInterval(refreshAll, 60000);
+
+        document.getElementById('adminKeyInput').focus();
+    </script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$TMPT Launches on Solana — Q1 2026</title>
+    <meta name="description" content="TEMPT Token ($TMPT) launches on Solana in Q1 2026. Zero chargebacks. 0.1% fees. Built for adult content creators. Get early access.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (optimized for sharing) -->
+    <meta property="og:title" content="$TMPT Launches Q1 2026 — Crypto Built for Creators">
+    <meta property="og:description" content="Zero chargebacks. 0.1% fees. Built for adult content creators on Solana. Join the early access list.">
+    <meta property="og:image" content="https://tempttoken.com/social-preview.png">
+    <meta property="og:url" content="https://tempttoken.com/launch.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="$TMPT Launches Q1 2026 — Crypto Built for Creators">
+    <meta name="twitter:description" content="Zero chargebacks. 0.1% fees. Built for adult content creators on Solana. Join the early access list.">
+    <meta name="twitter:image" content="https://tempttoken.com/social-preview.png">
+
+    <!-- Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "TEMPT Token ($TMPT) Solana Launch",
+      "description": "TEMPT Token launches on Solana — a utility cryptocurrency for adult content creator micropayments with 0.1% fees and zero chargebacks.",
+      "startDate": "2026-03-31",
+      "url": "https://tempttoken.com/launch.html",
+      "organizer": { "@type": "Organization", "name": "TEMPT Token", "url": "https://tempttoken.com" }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Space Grotesk', sans-serif; background: #030712; overflow-x: hidden; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7, #ec4899, #06b6d4);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .gradient-bg { background: linear-gradient(135deg, #7c3aed, #db2777); }
+
+        /* Animated background */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 60% 40% at 20% 20%, rgba(139,92,246,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(219,39,119,0.06) 0%, transparent 70%);
+        }
+
+        /* Countdown units */
+        .unit {
+            display: flex; flex-direction: column; align-items: center;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 24px 20px; min-width: 90px;
+        }
+        .unit-number {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800; line-height: 1;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .unit-label { font-size: 0.7rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
+
+        /* Checklist */
+        .check-done { color: #4ade80; }
+        .check-pending { color: #9ca3af; }
+
+        /* Input */
+        input[type="email"]:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,0.15); }
+
+        /* Pulse ring */
+        @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(1.4); opacity: 0; } }
+        .pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <div class="bg-glow"></div>
+
+    <!-- Nav -->
+    <nav style="background: rgba(3,7,18,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05);"
+         class="relative z-50 sticky top-0 py-4 px-6">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <a href="/" class="text-xl font-bold gradient-text">$TMPT</a>
+            <div class="flex gap-4 text-sm text-gray-400">
+                <a href="/" class="hover:text-white transition">Home</a>
+                <a href="/creators.html" class="hover:text-white transition">Creators</a>
+                <a href="/litepaper.html" class="hover:text-white transition">Litepaper</a>
+                <a href="/migrate.html" class="text-purple-400 font-semibold hover:text-purple-300 transition">Migrate ETH→SOL</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="relative z-10 px-6">
+
+        <!-- Hero -->
+        <section class="py-20 text-center max-w-3xl mx-auto">
+            <!-- Live badge -->
+            <div class="inline-flex items-center gap-2 mb-8">
+                <div class="relative">
+                    <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-400 absolute top-0 left-0 pulse-ring"></div>
+                </div>
+                <span class="text-green-400 text-sm font-semibold">Launching Q1 2026</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-none tracking-tight">
+                $TMPT Goes Live<br>
+                <span class="gradient-text">on Solana</span>
+            </h1>
+
+            <p class="text-gray-300 text-xl mb-12 leading-relaxed">
+                The first cryptocurrency purpose-built for adult content creator payments.<br>
+                Zero chargebacks. 0.1% fees. Instant settlements. No deplatforming.
+            </p>
+
+            <!-- Countdown -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12" id="countdown">
+                <div class="unit"><span class="unit-number" id="cd-days">--</span><span class="unit-label">Days</span></div>
+                <div class="unit"><span class="unit-number" id="cd-hours">--</span><span class="unit-label">Hours</span></div>
+                <div class="unit"><span class="unit-number" id="cd-mins">--</span><span class="unit-label">Minutes</span></div>
+                <div class="unit"><span class="unit-number" id="cd-secs">--</span><span class="unit-label">Seconds</span></div>
+            </div>
+
+            <!-- Email capture -->
+            <div class="max-w-md mx-auto">
+                <p class="text-gray-400 text-sm mb-4">Get notified the moment $TMPT goes live — plus early access perks.</p>
+                <div class="flex gap-3">
+                    <input type="email" id="launchEmail" placeholder="your@email.com"
+                        class="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition">
+                    <button onclick="signupLaunch()" id="launchBtn"
+                        class="gradient-bg px-6 py-3 rounded-xl font-bold whitespace-nowrap hover:opacity-90 transition disabled:opacity-50">
+                        Notify Me
+                    </button>
+                </div>
+                <div id="launchSuccess" class="hidden mt-3 text-green-400 text-sm font-semibold">
+                    🎉 You're on the early access list!
+                </div>
+                <div id="launchDuplicate" class="hidden mt-3 text-blue-400 text-sm">
+                    ✅ Already registered — you're in!
+                </div>
+                <p class="text-gray-600 text-xs mt-3">No spam. Unsubscribe anytime. We only email when it matters.</p>
+            </div>
+        </section>
+
+        <!-- Launch Checklist -->
+        <section class="max-w-2xl mx-auto mb-20">
+            <h2 class="text-2xl font-bold text-center mb-8">Launch Progress</h2>
+            <div class="space-y-3">
+                <div class="flex items-center gap-4 bg-gray-900/60 border border-green-900/40 rounded-xl px-6 py-4">
+                    <span class="text-green-400 text-xl shrink-0">✅</span>
+                    <div>
+                        <div class="font-semibold">Website &amp; Brand</div>
+                        <div class="text-gray-500 text-sm">Homepage, litepaper, blog, press kit, calculator — all live</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-900/60 border border-green-900/40 rounded-xl px-6 py-4">
+                    <span class="text-green-400 text-xl shrink-0">✅</span>
+                    <div>
+                        <div class="font-semibold">Creator &amp; Platform Onboarding Pages</div>
+                        <div class="text-gray-500 text-sm">Integration docs, API guide, creator FAQ — ready for inbound</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-900/60 border border-green-900/40 rounded-xl px-6 py-4">
+                    <span class="text-green-400 text-xl shrink-0">✅</span>
+                    <div>
+                        <div class="font-semibold">ETH → Solana Migration Portal</div>
+                        <div class="text-gray-500 text-sm">Existing ETH holders can register their Solana wallets now</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-900/60 border border-yellow-900/40 rounded-xl px-6 py-4">
+                    <span class="text-yellow-400 text-xl shrink-0">⏳</span>
+                    <div>
+                        <div class="font-semibold">Solana SPL Token Deployment</div>
+                        <div class="text-gray-500 text-sm">Token contract deploying to Solana mainnet</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-900/60 border border-gray-800 rounded-xl px-6 py-4">
+                    <span class="text-gray-600 text-xl shrink-0">⬜</span>
+                    <div>
+                        <div class="font-semibold text-gray-400">ETH Holder Airdrop</div>
+                        <div class="text-gray-500 text-sm">Snapshot taken → TMPT airdropped 1:1 to registered Solana wallets</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-900/60 border border-gray-800 rounded-xl px-6 py-4">
+                    <span class="text-gray-600 text-xl shrink-0">⬜</span>
+                    <div>
+                        <div class="font-semibold text-gray-400">DEX Listing &amp; Initial Liquidity</div>
+                        <div class="text-gray-500 text-sm">Jupiter, Raydium — public trading opens</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-gray-900/60 border border-gray-800 rounded-xl px-6 py-4">
+                    <span class="text-gray-600 text-xl shrink-0">⬜</span>
+                    <div>
+                        <div class="font-semibold text-gray-400">Platform Integration Launch</div>
+                        <div class="text-gray-500 text-sm">First partner platforms start accepting $TMPT tips</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why $TMPT -->
+        <section class="max-w-4xl mx-auto mb-20">
+            <h2 class="text-2xl font-bold text-center mb-8">Why Creators Choose $TMPT</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 text-center hover:border-purple-700/50 transition">
+                    <div class="text-4xl mb-3">🚫</div>
+                    <div class="text-2xl font-extrabold text-green-400 mb-1">Zero</div>
+                    <div class="font-semibold mb-2">Chargebacks</div>
+                    <div class="text-gray-500 text-sm">Blockchain transactions are final. No more $500 chargeback surprises wiping out your month.</div>
+                </div>
+                <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 text-center hover:border-purple-700/50 transition">
+                    <div class="text-4xl mb-3">💸</div>
+                    <div class="text-2xl font-extrabold text-purple-400 mb-1">0.1%</div>
+                    <div class="font-semibold mb-2">Transaction Fee</div>
+                    <div class="text-gray-500 text-sm">vs. 5–15% on credit cards. A creator earning $10K/month saves up to $1,400 every month.</div>
+                </div>
+                <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 text-center hover:border-purple-700/50 transition">
+                    <div class="text-4xl mb-3">⚡</div>
+                    <div class="text-2xl font-extrabold text-cyan-400 mb-1">&lt;1s</div>
+                    <div class="font-semibold mb-2">Instant Settlements</div>
+                    <div class="text-gray-500 text-sm">No 7–14 day holds. Tips hit your wallet in under a second. Cash out anytime.</div>
+                </div>
+                <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 text-center hover:border-purple-700/50 transition">
+                    <div class="text-4xl mb-3">🌍</div>
+                    <div class="text-2xl font-extrabold text-pink-400 mb-1">Global</div>
+                    <div class="font-semibold mb-2">No Banking Required</div>
+                    <div class="text-gray-500 text-sm">Reach 2.4B fans who can't use credit cards. Every country, no restrictions.</div>
+                </div>
+                <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 text-center hover:border-purple-700/50 transition">
+                    <div class="text-4xl mb-3">🔒</div>
+                    <div class="text-2xl font-extrabold text-yellow-400 mb-1">Private</div>
+                    <div class="font-semibold mb-2">Anonymous Payments</div>
+                    <div class="text-gray-500 text-sm">No embarrassing bank statements. Fans pay with full privacy — more likely to tip.</div>
+                </div>
+                <div class="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 text-center hover:border-purple-700/50 transition">
+                    <div class="text-4xl mb-3">🏛️</div>
+                    <div class="text-2xl font-extrabold text-orange-400 mb-1">Vote</div>
+                    <div class="font-semibold mb-2">Governance Rights</div>
+                    <div class="text-gray-500 text-sm">$TMPT holders vote on fee changes and treasury spending. You own a piece of the ecosystem.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETH holders CTA -->
+        <section class="max-w-2xl mx-auto mb-20">
+            <div class="bg-gradient-to-br from-purple-950/60 to-pink-950/40 border border-purple-800/40 rounded-2xl p-8 text-center">
+                <div class="text-3xl mb-3">🔄</div>
+                <h2 class="text-2xl font-bold mb-3">Already Hold $TMPT on Ethereum?</h2>
+                <p class="text-gray-300 mb-6 leading-relaxed">
+                    We're migrating to Solana with a 1:1 snapshot airdrop. Register your Solana wallet now to secure your tokens before the snapshot.
+                </p>
+                <a href="/migrate.html"
+                    class="inline-block gradient-bg text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition">
+                    Register for Migration →
+                </a>
+            </div>
+        </section>
+
+        <!-- Social proof / share -->
+        <section class="max-w-xl mx-auto mb-20 text-center">
+            <h2 class="text-xl font-bold mb-4">Spread the Word</h2>
+            <p class="text-gray-400 text-sm mb-6">Help adult creators discover a better payment solution.</p>
+            <div class="flex justify-center gap-4 flex-wrap">
+                <a href="https://twitter.com/intent/tweet?text=🪙+%24TMPT+launches+on+Solana+in+Q1+2026+%E2%80%94+zero+chargebacks%2C+0.1%25+fees%2C+built+for+adult+content+creators.+Get+early+access+%E2%86%92+https%3A%2F%2Ftempttoken.com%2Flaunch.html&via=TemptToken"
+                    target="_blank" rel="noopener"
+                    class="flex items-center gap-2 bg-black border border-gray-700 hover:border-gray-500 px-6 py-3 rounded-xl font-semibold text-sm transition">
+                    <span class="font-bold">𝕏</span> Share on X
+                </a>
+                <a href="https://t.me/share/url?url=https://tempttoken.com/launch.html&text=🪙+%24TMPT+launches+on+Solana+—+built+for+adult+creators.+Zero+chargebacks%2C+0.1%25+fees."
+                    target="_blank" rel="noopener"
+                    class="flex items-center gap-2 bg-blue-900/40 border border-blue-800/40 hover:border-blue-600/60 px-6 py-3 rounded-xl font-semibold text-sm transition">
+                    ✈ Share on Telegram
+                </a>
+                <button onclick="copyLink()"
+                    class="flex items-center gap-2 bg-gray-900 border border-gray-700 hover:border-gray-500 px-6 py-3 rounded-xl font-semibold text-sm transition">
+                    🔗 Copy Link
+                </button>
+            </div>
+            <div id="copyLinkMsg" class="hidden text-green-400 text-sm mt-3 font-semibold">✅ Link copied!</div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-gray-900 py-10 px-6 text-center">
+        <a href="/" class="text-xl font-extrabold gradient-text mb-4 block">$TMPT</a>
+        <div class="flex flex-wrap justify-center gap-5 text-sm text-gray-600 mb-4">
+            <a href="/" class="hover:text-white transition">Home</a>
+            <a href="/for-platforms.html" class="hover:text-white transition">Platforms</a>
+            <a href="/creators.html" class="hover:text-white transition">Creators</a>
+            <a href="/litepaper.html" class="hover:text-white transition">Litepaper</a>
+            <a href="/migrate.html" class="hover:text-white transition">Migrate</a>
+            <a href="/press.html" class="hover:text-white transition">Press</a>
+            <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+            <a href="/privacy.html" class="hover:text-white transition">Privacy</a>
+            <a href="/terms.html" class="hover:text-white transition">Terms</a>
+        </div>
+        <p class="text-gray-800 text-xs">© 2026 TEMPT Token. Not financial advice. 18+ only.</p>
+    </footer>
+
+    <script>
+        // ── Countdown ─────────────────────────────────────────────────────
+        const LAUNCH_DATE = new Date('2026-03-31T23:59:59Z');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = LAUNCH_DATE - now;
+
+            if (diff <= 0) {
+                document.getElementById('cd-days').textContent = '00';
+                document.getElementById('cd-hours').textContent = '00';
+                document.getElementById('cd-mins').textContent = '00';
+                document.getElementById('cd-secs').textContent = '00';
+                return;
+            }
+
+            const days  = Math.floor(diff / 86400000);
+            const hours = Math.floor((diff % 86400000) / 3600000);
+            const mins  = Math.floor((diff % 3600000) / 60000);
+            const secs  = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById('cd-days').textContent  = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
+            document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ── Email signup ──────────────────────────────────────────────────
+        async function signupLaunch() {
+            const email = document.getElementById('launchEmail').value.trim().toLowerCase();
+            if (!email || !email.includes('@')) {
+                document.getElementById('launchEmail').style.borderColor = '#ef4444';
+                return;
+            }
+
+            const btn = document.getElementById('launchBtn');
+            btn.disabled = true;
+            btn.textContent = '…';
+
+            try {
+                const res = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, source: 'launch_countdown' })
+                });
+                const data = await res.json();
+
+                // localStorage backup
+                const subs = JSON.parse(localStorage.getItem('tmpt_subs') || '[]');
+                if (!subs.includes(email)) { subs.push(email); localStorage.setItem('tmpt_subs', JSON.stringify(subs)); }
+
+                document.getElementById('launchEmail').value = '';
+                if (data.duplicate) {
+                    document.getElementById('launchDuplicate').classList.remove('hidden');
+                } else {
+                    document.getElementById('launchSuccess').classList.remove('hidden');
+                }
+            } catch {
+                // fallback
+                const subs = JSON.parse(localStorage.getItem('tmpt_subs') || '[]');
+                if (!subs.includes(email)) { subs.push(email); localStorage.setItem('tmpt_subs', JSON.stringify(subs)); }
+                document.getElementById('launchEmail').value = '';
+                document.getElementById('launchSuccess').classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Notify Me';
+            }
+        }
+
+        document.getElementById('launchEmail').addEventListener('keydown', e => {
+            if (e.key === 'Enter') signupLaunch();
+        });
+
+        // ── Copy link ─────────────────────────────────────────────────────
+        function copyLink() {
+            navigator.clipboard.writeText('https://tempttoken.com/launch.html').then(() => {
+                const el = document.getElementById('copyLinkMsg');
+                el.classList.remove('hidden');
+                setTimeout(() => el.classList.add('hidden'), 3000);
+            });
+        }
+    </script>
+</body>
+</html>

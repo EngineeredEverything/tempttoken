@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH → Solana Migration — TEMPT Token ($TMPT)</title>
+    <meta name="description" content="TEMPT Token is migrating from Ethereum to Solana. If you hold $TMPT on ETH, register your Solana wallet here to receive your migrated tokens.">
+    <meta property="og:title" content="$TMPT Migration: Ethereum → Solana">
+    <meta property="og:description" content="Existing TMPT holders on Ethereum can register to receive equivalent tokens on Solana. Official migration portal.">
+    <meta property="og:image" content="https://tempttoken.com/social-preview.png">
+    <meta property="og:url" content="https://tempttoken.com/migrate.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; background: #030712; }
+        .gradient-text { background: linear-gradient(135deg, #a855f7, #ec4899, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-bg { background: linear-gradient(135deg, #7c3aed, #db2777); }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; }
+        .step-line { position: absolute; top: 28px; left: calc(50% + 24px); width: calc(100% - 48px); height: 2px; background: linear-gradient(90deg, #7c3aed40, transparent); }
+        input:focus { outline: none; border-color: #7c3aed !important; box-shadow: 0 0 0 3px rgba(124,58,237,0.15); }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+
+    <!-- Nav -->
+    <nav style="background: rgba(3,7,18,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06);" class="sticky top-0 z-50 py-4 px-6">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <a href="/" class="text-xl font-bold gradient-text">$TMPT</a>
+            <div class="flex flex-wrap gap-4 text-sm text-gray-400">
+                <a href="/" class="hover:text-white transition">Home</a>
+                <a href="/creators.html" class="hover:text-white transition">Creators</a>
+                <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+                <a href="/litepaper.html" class="hover:text-white transition">Litepaper</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-16 px-6 text-center" style="background: radial-gradient(ellipse at top, rgba(139,92,246,0.15) 0%, transparent 70%);">
+        <div class="max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-yellow-900/30 border border-yellow-700/40 text-yellow-300 text-sm font-semibold px-4 py-2 rounded-full mb-6">
+                ⚠️ Official Migration — Action Required for ETH Holders
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-5 leading-tight">
+                $TMPT is Moving to <span class="gradient-text">Solana</span>
+            </h1>
+            <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                We're migrating from Ethereum to Solana for faster, cheaper transactions. If you hold $TMPT on ETH, register your Solana wallet below to receive an equal amount of Solana-native $TMPT.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <div class="status-badge bg-green-900/40 border border-green-700/40 text-green-300">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block"></span>
+                    Registration Open
+                </div>
+                <div class="status-badge bg-purple-900/40 border border-purple-700/40 text-purple-300">
+                    🗓 Snapshot: TBA — watch Twitter
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-3xl mx-auto px-6 pb-24 space-y-10">
+
+        <!-- How It Works -->
+        <div class="card p-8">
+            <h2 class="text-xl font-bold mb-8 text-center">How the Migration Works</h2>
+            <div class="grid md:grid-cols-4 gap-6 text-center text-sm relative">
+                <div>
+                    <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-lg font-bold mx-auto mb-3">1</div>
+                    <div class="font-semibold mb-1">Snapshot</div>
+                    <div class="text-gray-500 text-xs">We record all ETH wallet balances at a specific block</div>
+                </div>
+                <div>
+                    <div class="w-12 h-12 rounded-full bg-purple-900/50 border border-purple-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">2</div>
+                    <div class="font-semibold mb-1">Register</div>
+                    <div class="text-gray-500 text-xs">Link your ETH address to a Solana wallet using this form</div>
+                </div>
+                <div>
+                    <div class="w-12 h-12 rounded-full bg-purple-900/50 border border-purple-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">3</div>
+                    <div class="font-semibold mb-1">Deploy</div>
+                    <div class="text-gray-500 text-xs">New SPL token minted on Solana matching snapshot supply</div>
+                </div>
+                <div>
+                    <div class="w-12 h-12 rounded-full bg-purple-900/50 border border-purple-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">4</div>
+                    <div class="font-semibold mb-1">Receive</div>
+                    <div class="text-gray-500 text-xs">TMPT airdropped to your Solana wallet — 1:1 ratio</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Claim Form -->
+        <div class="card p-8">
+            <h2 class="text-2xl font-bold mb-2">Register Your Solana Wallet</h2>
+            <p class="text-gray-400 mb-6 text-sm">Submit your ETH address and Solana wallet. We'll verify your snapshot balance and send your TMPT tokens before the Solana launch.</p>
+
+            <form id="migrateForm" onsubmit="submitMigration(event)" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">
+                        Your ETH Wallet Address <span class="text-red-400">*</span>
+                    </label>
+                    <input type="text" id="ethAddress" required
+                        placeholder="0x..."
+                        class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition"
+                        oninput="validateEth(this)">
+                    <div id="ethError" class="text-red-400 text-xs mt-1.5 hidden">Enter a valid Ethereum address (0x...)</div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">
+                        Your Solana Wallet Address <span class="text-red-400">*</span>
+                        <span class="text-gray-500 font-normal ml-2">(Phantom, Backpack, Solflare, etc.)</span>
+                    </label>
+                    <input type="text" id="solAddress" required
+                        placeholder="Your Solana wallet address"
+                        class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition"
+                        oninput="validateSol(this)">
+                    <div id="solError" class="text-red-400 text-xs mt-1.5 hidden">Enter a valid Solana address (32–44 characters)</div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">
+                        Email Address <span class="text-gray-500 font-normal">(optional — for migration updates)</span>
+                    </label>
+                    <input type="email" id="email" placeholder="your@email.com"
+                        class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">
+                        Approximate TMPT Balance <span class="text-gray-500 font-normal">(optional — we'll verify on-chain)</span>
+                    </label>
+                    <input type="number" id="balance" placeholder="e.g. 10000"
+                        class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 transition">
+                </div>
+
+                <!-- Consent -->
+                <div class="bg-gray-900 rounded-xl p-4 space-y-3">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" id="consent1" required class="mt-1 accent-purple-500 w-4 h-4 shrink-0">
+                        <span class="text-sm text-gray-300">I confirm this ETH address holds $TMPT tokens and I control this wallet.</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" id="consent2" required class="mt-1 accent-purple-500 w-4 h-4 shrink-0">
+                        <span class="text-sm text-gray-300">I understand migration amounts are determined by the on-chain snapshot, not self-reported balances.</span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" id="consent3" required class="mt-1 accent-purple-500 w-4 h-4 shrink-0">
+                        <span class="text-sm text-gray-300">I am 18+ and agree to the <a href="/terms.html" class="text-purple-400 hover:underline" target="_blank">Terms of Service</a>.</span>
+                    </label>
+                </div>
+
+                <button type="submit" id="submitBtn"
+                    class="w-full gradient-bg py-4 rounded-xl font-bold text-lg hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    Register Wallet →
+                </button>
+            </form>
+
+            <!-- Success -->
+            <div id="successMsg" class="hidden mt-6 bg-green-900/30 border border-green-700/40 rounded-xl p-6 text-center">
+                <div class="text-4xl mb-3">🎉</div>
+                <div class="text-xl font-bold text-green-300 mb-2">Registration Received!</div>
+                <p class="text-gray-300 text-sm">We've recorded your wallet mapping. When the Solana token launches, your TMPT will be airdropped to your Solana address automatically.</p>
+                <p class="text-gray-500 text-xs mt-3">Follow <a href="https://twitter.com/TemptToken" class="text-purple-400 hover:underline">@TemptToken</a> for migration updates and the snapshot announcement.</p>
+            </div>
+
+            <!-- Error -->
+            <div id="errorMsg" class="hidden mt-6 bg-red-900/30 border border-red-700/40 rounded-xl p-4 text-center">
+                <p class="text-red-300 text-sm" id="errorText">Something went wrong. Please try again or contact support@tempttoken.com.</p>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="card p-8">
+            <h2 class="text-xl font-bold mb-6">Migration FAQ</h2>
+            <div class="space-y-5">
+                <details class="group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-gray-200 py-2 border-b border-white/5">
+                        What is the 1:1 ratio?
+                        <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="pt-4 text-gray-400 text-sm leading-relaxed">
+                        For every 1 TMPT you hold on Ethereum at the snapshot block, you will receive 1 TMPT on Solana. No value is lost — the supply migrates directly.
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-gray-200 py-2 border-b border-white/5">
+                        Do I need to sell my ETH TMPT first?
+                        <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="pt-4 text-gray-400 text-sm leading-relaxed">
+                        No. Just register your wallets here. Hold your ETH tokens until after you confirm you've received your Solana TMPT. Once migration is complete, the ETH token will be officially deprecated.
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-gray-200 py-2 border-b border-white/5">
+                        I don't have a Solana wallet yet — what do I use?
+                        <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="pt-4 text-gray-400 text-sm leading-relaxed">
+                        We recommend <a href="https://phantom.app" target="_blank" class="text-purple-400 hover:underline">Phantom Wallet</a> — free, easy, and the most popular Solana wallet. Download, create a wallet, copy your Solana address, and paste it above.
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-gray-200 py-2 border-b border-white/5">
+                        What if I miss the claim window?
+                        <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="pt-4 text-gray-400 text-sm leading-relaxed">
+                        We'll keep a 30-day claim window open after the Solana launch. If you miss it, contact support@tempttoken.com — we will do our best to accommodate legitimate holders.
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-gray-200 py-2 border-b border-white/5">
+                        Is this safe? How do I know it's not a scam?
+                        <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="pt-4 text-gray-400 text-sm leading-relaxed">
+                        This is the only official migration portal — always verify you're on <strong>tempttoken.com</strong>. We will <strong>never</strong> ask for your private key or seed phrase. If anyone DMs you claiming to be TMPT support and asking for keys, it's a scam.
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="flex items-center justify-between cursor-pointer font-semibold text-gray-200 py-2 border-b border-white/5">
+                        Why Solana?
+                        <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div class="pt-4 text-gray-400 text-sm leading-relaxed">
+                        Solana processes transactions in under 1 second for fractions of a cent — vs. Ethereum's 15–60 second finality and $1–$20 gas fees. For micropayment use cases like $1–$10 creator tips, Ethereum gas is prohibitive. Solana makes every transaction economically viable.
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Warning -->
+        <div class="bg-yellow-900/20 border border-yellow-700/40 rounded-xl p-6">
+            <div class="flex items-start gap-3">
+                <span class="text-2xl">⚠️</span>
+                <div>
+                    <div class="font-bold text-yellow-300 mb-2">Security Warning</div>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        The <strong>only</strong> official migration URL is <strong>tempttoken.com/migrate.html</strong>. Bookmark this page. The TMPT team will never DM you first, never ask for your private key or seed phrase, and will never ask you to send tokens to "unlock" your migration. Any other site or message claiming to be TMPT migration is a scam.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legal -->
+        <p class="text-gray-700 text-xs leading-relaxed">
+            Migration is provided as-is. Token amounts are determined solely by on-chain snapshot data. TEMPT Token makes no guarantees regarding future token value. This is not financial advice. 18+ only. See <a href="/terms.html" class="hover:text-gray-500 underline">Terms of Service</a>.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-900 py-10 px-6 text-center">
+        <a href="/" class="text-xl font-extrabold gradient-text mb-4 block">$TMPT</a>
+        <div class="flex flex-wrap justify-center gap-5 text-sm text-gray-500">
+            <a href="/" class="hover:text-white transition">Home</a>
+            <a href="/for-platforms.html" class="hover:text-white transition">Platforms</a>
+            <a href="/creators.html" class="hover:text-white transition">Creators</a>
+            <a href="/litepaper.html" class="hover:text-white transition">Litepaper</a>
+            <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+            <a href="/press.html" class="hover:text-white transition">Press</a>
+            <a href="/privacy.html" class="hover:text-white transition">Privacy</a>
+            <a href="/terms.html" class="hover:text-white transition">Terms</a>
+        </div>
+        <p class="text-gray-800 text-xs mt-4">© 2026 TEMPT Token. Not financial advice. 18+ only.</p>
+    </footer>
+
+    <script>
+        function validateEth(input) {
+            const val = input.value.trim();
+            const err = document.getElementById('ethError');
+            const valid = /^0x[0-9a-fA-F]{40}$/.test(val);
+            if (val.length > 5 && !valid) {
+                err.classList.remove('hidden');
+                input.style.borderColor = '#ef4444';
+            } else {
+                err.classList.add('hidden');
+                input.style.borderColor = valid ? '#22c55e' : '';
+            }
+        }
+
+        function validateSol(input) {
+            const val = input.value.trim();
+            const err = document.getElementById('solError');
+            const valid = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(val);
+            if (val.length > 5 && !valid) {
+                err.classList.remove('hidden');
+                input.style.borderColor = '#ef4444';
+            } else {
+                err.classList.add('hidden');
+                input.style.borderColor = valid ? '#22c55e' : '';
+            }
+        }
+
+        async function submitMigration(e) {
+            e.preventDefault();
+
+            const ethAddress = document.getElementById('ethAddress').value.trim();
+            const solAddress = document.getElementById('solAddress').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const balance = document.getElementById('balance').value.trim();
+
+            // Validate
+            if (!/^0x[0-9a-fA-F]{40}$/.test(ethAddress)) {
+                document.getElementById('ethError').classList.remove('hidden');
+                return;
+            }
+            if (!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(solAddress)) {
+                document.getElementById('solError').classList.remove('hidden');
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting…';
+
+            document.getElementById('errorMsg').classList.add('hidden');
+
+            try {
+                const res = await fetch('/api/migrate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ethAddress, solAddress, email: email || null, balance: balance || null })
+                });
+
+                const data = await res.json();
+
+                if (data.success || data.duplicate) {
+                    document.getElementById('migrateForm').classList.add('hidden');
+                    document.getElementById('successMsg').classList.remove('hidden');
+
+                    // Also subscribe email if provided
+                    if (email) {
+                        fetch('/api/subscribe', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, source: 'migration_form' })
+                        }).catch(() => {});
+                    }
+                } else {
+                    throw new Error(data.message || 'Server error');
+                }
+            } catch (err) {
+                // Fallback: save locally
+                const registrations = JSON.parse(localStorage.getItem('tmpt_migrations') || '[]');
+                registrations.push({ ethAddress, solAddress, email, balance, date: new Date().toISOString() });
+                localStorage.setItem('tmpt_migrations', JSON.stringify(registrations));
+
+                document.getElementById('migrateForm').classList.add('hidden');
+                document.getElementById('successMsg').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

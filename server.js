@@ -2,6 +2,7 @@
  * TEMPT Token API Server
  * - Email subscriber collection
  * - ETH → Solana migration registration
+ * - Privacy-first page view analytics (no cookies, no fingerprinting)
  */
 
 const http = require('http');
@@ -15,10 +16,13 @@ const SUBSCRIBERS_FILE = path.join(DATA_DIR, 'subscribers.json');
 const MIGRATIONS_FILE = path.join(DATA_DIR, 'migrations.json');
 const ADMIN_KEY = process.env.TEMPT_ADMIN_KEY || 'tempt-admin-2026';
 
+const ANALYTICS_FILE = path.join(DATA_DIR, 'analytics.json');
+
 // Ensure data directory and files exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(SUBSCRIBERS_FILE)) fs.writeFileSync(SUBSCRIBERS_FILE, JSON.stringify({ subscribers: [] }, null, 2));
 if (!fs.existsSync(MIGRATIONS_FILE)) fs.writeFileSync(MIGRATIONS_FILE, JSON.stringify({ registrations: [] }, null, 2));
+if (!fs.existsSync(ANALYTICS_FILE)) fs.writeFileSync(ANALYTICS_FILE, JSON.stringify({ pageviews: [] }, null, 2));
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -239,14 +243,82 @@ const server = http.createServer(async (req, res) => {
     return json(res, 200, { success: true, registration: reg });
   }
 
+  // ── POST /api/pageview ────────────────────────────────────────────────────
+  if (req.method === 'POST' && pathname === '/api/pageview') {
+    try {
+      const body = await parseBody(req);
+      const page     = (body.page || '/').trim().substring(0, 100);
+      const referrer = (body.referrer || '').trim().substring(0, 200);
+      const ua       = req.headers['user-agent'] || '';
+
+      // Skip obvious bots
+      if (/bot|crawler|spider|crawl|fetch|scraper|headless|lighthouse/i.test(ua))
+        return json(res, 204, {});
+
+      const device = /mobile|android|iphone|ipad/i.test(ua) ? 'mobile' : 'desktop';
+
+      let refSource = 'direct';
+      if (referrer) {
+        if (/twitter\.com|t\.co/i.test(referrer))   refSource = 'twitter';
+        else if (/t\.me|telegram/i.test(referrer))  refSource = 'telegram';
+        else if (/google\./i.test(referrer))         refSource = 'google';
+        else if (/discord/i.test(referrer))          refSource = 'discord';
+        else if (/reddit/i.test(referrer))           refSource = 'reddit';
+        else                                          refSource = 'other';
+      }
+
+      const data = loadJSON(ANALYTICS_FILE);
+      if (!data.pageviews) data.pageviews = [];
+      if (data.pageviews.length >= 10000) data.pageviews = data.pageviews.slice(-9000);
+
+      data.pageviews.push({ ts: new Date().toISOString(), page, ref: refSource, device });
+      saveJSON(ANALYTICS_FILE, data);
+      return json(res, 200, { success: true });
+    } catch { return json(res, 500, { success: false }); }
+  }
+
+  // ── GET /api/admin/analytics ──────────────────────────────────────────────
+  if (req.method === 'GET' && pathname === '/api/admin/analytics') {
+    const adminKey = req.headers['x-admin-key'] || url.searchParams.get('key');
+    if (adminKey !== ADMIN_KEY) return json(res, 401, { success: false, message: 'Unauthorized' });
+
+    const data  = loadJSON(ANALYTICS_FILE);
+    const views = data.pageviews || [];
+    const days  = parseInt(url.searchParams.get('days') || '7');
+    const since = new Date(Date.now() - days * 86400000);
+    const recent = views.filter(v => new Date(v.ts) >= since);
+
+    const byPage = {}, byRef = {}, byDevice = {}, byDay = {};
+    for (const v of recent) {
+      byPage[v.page]     = (byPage[v.page]     || 0) + 1;
+      byRef[v.ref]       = (byRef[v.ref]       || 0) + 1;
+      byDevice[v.device] = (byDevice[v.device] || 0) + 1;
+      const day = v.ts.split('T')[0];
+      byDay[day] = (byDay[day] || 0) + 1;
+    }
+
+    return json(res, 200, {
+      success: true,
+      period: `last ${days} days`,
+      total: recent.length,
+      allTime: views.length,
+      topPages: Object.entries(byPage).sort((a,b)=>b[1]-a[1]).slice(0,20).map(([page,count])=>({page,count})),
+      sources: byRef,
+      devices: byDevice,
+      dailyTrend: Object.entries(byDay).sort((a,b)=>a[0].localeCompare(b[0])).map(([date,count])=>({date,count})),
+    });
+  }
+
   // ── Health check ──────────────────────────────────────────────────────────
   if (pathname === '/api/health') {
     const subs = loadJSON(SUBSCRIBERS_FILE);
     const migs = loadJSON(MIGRATIONS_FILE);
+    const anl  = loadJSON(ANALYTICS_FILE);
     return json(res, 200, {
       status: 'ok',
       subscribers: (subs.subscribers || []).length,
-      migrations: (migs.registrations || []).length,
+      migrations:  (migs.registrations || []).length,
+      pageviews:   (anl.pageviews || []).length,
       ts: new Date().toISOString(),
     });
   }

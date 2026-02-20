@@ -554,31 +554,29 @@
             if (!email) return;
 
             const btn = e.target.querySelector('button[type="submit"]') || e.target;
-            if (btn) btn.disabled = true;
+            if (btn) { btn.disabled = true; btn.textContent = 'Joining…'; }
 
             try {
-                const res = await fetch('/api/subscribe', {
+                const res = await fetch('/api/waitlist', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, source: 'creators_waitlist' })
+                    body: JSON.stringify({ email, source: 'creators_page' })
                 });
                 const data = await res.json();
 
-                // Also save locally as fallback
-                const key = 'tmpt_newsletter_subscribers';
-                let subs = JSON.parse(localStorage.getItem(key) || '[]');
-                if (!subs.find(s => s.email === email)) {
-                    subs.push({ email, date: new Date().toISOString(), source: 'creators_waitlist' });
-                    localStorage.setItem(key, JSON.stringify(subs));
-                }
-
-                if (data.duplicate) {
-                    document.getElementById('waitlist-duplicate').classList.remove('hidden');
-                    document.getElementById('waitlist-success').classList.add('hidden');
-                } else {
+                if (data.success) {
+                    // Save refCode and redirect to waitlist page so they can share
+                    if (data.refCode) localStorage.setItem('tmpt_wl_ref', data.refCode);
+                    if (data.position) localStorage.setItem('tmpt_wl_pos', data.position);
+                    // Brief success then redirect
                     document.getElementById('waitlist-success').classList.remove('hidden');
-                    document.getElementById('waitlist-duplicate').classList.add('hidden');
                     document.getElementById('waitlist-email').value = '';
+                    setTimeout(() => { window.location.href = '/waitlist.html'; }, 1200);
+                } else if (data.duplicate) {
+                    document.getElementById('waitlist-duplicate').classList.remove('hidden');
+                    setTimeout(() => { window.location.href = '/waitlist.html'; }, 1200);
+                } else {
+                    if (btn) { btn.disabled = false; btn.textContent = 'Join Waitlist'; }
                 }
             } catch (err) {
                 // Fallback: localStorage only

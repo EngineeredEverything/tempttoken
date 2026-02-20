@@ -113,25 +113,49 @@
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .glow { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
     </style>
+    <style>
+        .hbg { display:none; flex-direction:column; justify-content:space-between; width:28px; height:20px; cursor:pointer; background:none; border:none; padding:0; }
+        .hbg span { display:block; height:2px; width:100%; background:#fff; border-radius:2px; transition:transform .25s,opacity .25s; }
+        .hbg.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+        .hbg.open span:nth-child(2){opacity:0;}
+        .hbg.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+        .mnav { display:none; position:fixed; inset:0; z-index:999; background:rgba(9,9,11,.98); padding:80px 30px 30px; flex-direction:column; overflow-y:auto; }
+        .mnav.open { display:flex; }
+        .mnav a { display:block; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.07); color:rgba(255,255,255,.8); text-decoration:none; font-size:1.1rem; font-weight:500; }
+        .mnav .cls { position:absolute; top:22px; right:24px; background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer; }
+        @media(max-width:768px){ .hbg{display:flex;} .nav-links-blog{display:none!important;} }
+    </style>
 </head>
 <body class="bg-gray-950 text-white">
     <!-- Navigation -->
+    <!-- Mobile nav -->
+    <div class="mnav" id="mnav">
+        <button class="cls" onclick="cmnav()">✕</button>
+        <a href="/waitlist.html" style="color:#ec4899;font-weight:700;">⚡ Join Waitlist</a>
+        <a href="/">Home</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/for-platforms.html">Platforms</a>
+        <a href="/creators.html">Creators</a>
+        <a href="/blog.html" style="color:#a855f7;">Blog</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/litepaper.html">Litepaper</a>
+        <a href="/waitlist.html">Waitlist</a>
+    </div>
     <nav class="container mx-auto px-6 py-4 border-b border-gray-800">
         <div class="flex justify-between items-center">
-            <div class="text-2xl font-bold">🪙 TEMPT</div>
-            <div class="flex flex-wrap gap-4 text-sm">
-                <a href="index.html" class="hover:text-purple-400 transition">Home</a>
-                <a href="dashboard.html" class="hover:text-purple-400 transition">Dashboard</a>
-                <a href="governance.html" class="hover:text-purple-400 transition">Governance</a>
-                <a href="calculator.html" class="hover:text-purple-400 transition">Calculator</a>
-                <a href="for-platforms.html" class="hover:text-purple-400 transition">Platforms</a>
-                <a href="creators.html" class="hover:text-purple-400 transition">Creators</a>
-                <a href="blog.html" class="text-purple-400">Blog</a>
-                <a href="litepaper.html" class="hover:text-purple-400 transition">Litepaper</a>
-                <a href="faq.html" class="hover:text-purple-400 transition">FAQ</a>
-                <a href="privacy.html" class="hover:text-purple-400 transition">Privacy</a>
-                <a href="terms.html" class="hover:text-purple-400 transition">Terms</a>
+            <a href="/" class="text-2xl font-bold" style="text-decoration:none;color:#fff;">🪙 TEMPT</a>
+            <div class="nav-links-blog flex flex-wrap gap-4 text-sm">
+                <a href="/" class="hover:text-purple-400 transition">Home</a>
+                <a href="/how-it-works.html" class="hover:text-purple-400 transition">How It Works</a>
+                <a href="/for-platforms.html" class="hover:text-purple-400 transition">Platforms</a>
+                <a href="/creators.html" class="hover:text-purple-400 transition">Creators</a>
+                <a href="/blog.html" class="text-purple-400">Blog</a>
+                <a href="/faq.html" class="hover:text-purple-400 transition">FAQ</a>
+                <a href="/waitlist.html" style="color:#ec4899;font-weight:700;">⚡ Waitlist</a>
             </div>
+            <button class="hbg" id="hbgBtn" onclick="tmnav()" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -890,6 +914,11 @@
     </footer>
 
 <!-- Feedback Widget -->
+<script>
+function tmnav(){const n=document.getElementById('mnav'),b=document.getElementById('hbgBtn'),o=n.classList.toggle('open');b.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
+function cmnav(){document.getElementById('mnav').classList.remove('open');document.getElementById('hbgBtn').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')cmnav();});
+</script>
 <style>.fb-btn{position:fixed;bottom:15px;right:15px;background:rgba(0,0,0,0.05);color:#6b7280;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:12px;z-index:9999;border:1px solid rgba(0,0,0,0.1);transition:all 0.2s;opacity:0.4}.fb-btn:hover{opacity:1;background:rgba(0,0,0,0.08);transform:translateY(-1px)}.fb-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:10000;align-items:center;justify-content:center}.fb-modal.active{display:flex}.fb-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%}.fb-content h3{margin:0 0 20px;color:#1f2937}.fb-content textarea,.fb-content input{width:100%;padding:12px;margin-bottom:15px;border:1px solid #d1d5db;border-radius:6px;font-size:14px}.fb-content textarea{min-height:120px}.fb-btns{display:flex;gap:10px;justify-content:flex-end}.fb-btns button{padding:10px 20px;border-radius:6px;border:none;cursor:pointer;font-weight:600}.fb-submit{background:#3b82f6;color:#fff}.fb-cancel{background:#e5e7eb;color:#374151}.fb-ok{color:#10b981;margin-top:10px;display:none}</style>
 <button class="fb-btn" onclick="openFB()">💬 Feedback</button>
 <div class="fb-modal" id="fbModal"><div class="fb-content"><h3>Send Feedback</h3><input id="fbEmail" placeholder="Your email (optional)"><textarea id="fbMsg" placeholder="Share your thoughts, report a bug, or request a feature..."></textarea><div class="fb-btns"><button class="fb-cancel" onclick="closeFB()">Cancel</button><button class="fb-submit" onclick="sendFB()">Submit</button></div><div class="fb-ok" id="fbOk">✅ Thank you! Your feedback has been sent.</div></div></div>

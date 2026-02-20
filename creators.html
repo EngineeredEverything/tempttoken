@@ -76,24 +76,49 @@
         }
         .hero-glow { animation: pulse-glow 3s ease-in-out infinite; }
     </style>
+    <style>
+        .hbg{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;}
+        .hbg span{display:block;height:2px;width:100%;background:#fff;border-radius:2px;transition:transform .25s,opacity .25s;}
+        .hbg.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+        .hbg.open span:nth-child(2){opacity:0;}
+        .hbg.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+        .mnav{display:none;position:fixed;inset:0;z-index:999;background:rgba(9,9,11,.98);padding:80px 30px 30px;flex-direction:column;overflow-y:auto;}
+        .mnav.open{display:flex;}
+        .mnav a{display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.8);text-decoration:none;font-size:1.1rem;font-weight:500;}
+        .mnav .cls{position:absolute;top:22px;right:24px;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;}
+        @media(max-width:768px){.hbg{display:flex;}.nav-links-cr{display:none!important;}}
+    </style>
 </head>
 <body class="bg-gray-950 text-white">
 
     <!-- Navigation -->
+    <!-- Mobile nav -->
+    <div class="mnav" id="mnav">
+        <button class="cls" onclick="cmnav()">✕</button>
+        <a href="/waitlist.html" style="color:#ec4899;font-weight:700;">⚡ Join Waitlist</a>
+        <a href="/">Home</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/for-platforms.html">For Platforms</a>
+        <a href="/creators.html" style="color:#a855f7;">For Creators</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/litepaper.html">Litepaper</a>
+    </div>
     <nav class="container mx-auto px-6 py-4 border-b border-gray-800">
         <div class="flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold">🪙 TEMPT</a>
-            <div class="flex flex-wrap gap-4 text-sm">
-                <a href="index.html" class="hover:text-purple-400 transition">Home</a>
-                <a href="dashboard.html" class="hover:text-purple-400 transition">Dashboard</a>
-                <a href="for-platforms.html" class="hover:text-purple-400 transition">Platforms</a>
-                <a href="creators.html" class="text-purple-400">Creators</a>
-                <a href="blog.html" class="hover:text-purple-400 transition">Blog</a>
-                <a href="faq.html" class="hover:text-purple-400 transition">FAQ</a>
-                <a href="litepaper.html" class="hover:text-purple-400 transition">Litepaper</a>
-                <a href="privacy.html" class="hover:text-purple-400 transition">Privacy</a>
-                <a href="terms.html" class="hover:text-purple-400 transition">Terms</a>
+            <a href="/" class="text-2xl font-bold" style="text-decoration:none;color:#fff;">🪙 TEMPT</a>
+            <div class="nav-links-cr flex flex-wrap gap-4 text-sm">
+                <a href="/" class="hover:text-purple-400 transition">Home</a>
+                <a href="/how-it-works.html" class="hover:text-purple-400 transition">How It Works</a>
+                <a href="/for-platforms.html" class="hover:text-purple-400 transition">Platforms</a>
+                <a href="/creators.html" class="text-purple-400">Creators</a>
+                <a href="/blog.html" class="hover:text-purple-400 transition">Blog</a>
+                <a href="/faq.html" class="hover:text-purple-400 transition">FAQ</a>
+                <a href="/waitlist.html" style="color:#ec4899;font-weight:700;">⚡ Waitlist</a>
             </div>
+            <button class="hbg" id="hbgBtn" onclick="tmnav()" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -597,6 +622,11 @@
                 if (btn) btn.disabled = false;
             }
         }
+    </script>
+    <script>
+        function tmnav(){const n=document.getElementById('mnav'),b=document.getElementById('hbgBtn'),o=n.classList.toggle('open');b.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
+        function cmnav(){document.getElementById('mnav').classList.remove('open');document.getElementById('hbgBtn').classList.remove('open');document.body.style.overflow='';}
+        document.addEventListener('keydown',e=>{if(e.key==='Escape')cmnav();});
     </script>
 </body>
 </html>

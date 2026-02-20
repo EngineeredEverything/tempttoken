@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How $TMPT Works — Crypto Payments for Adult Creators on Solana</title>
+  <meta name="description" content="Learn exactly how $TMPT works: zero-chargeback crypto payments for cam sites, AI companions, and adult content creators on Solana. Step-by-step flow, fees, and integration guide." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="How $TMPT Works — Crypto Payments for Adult Creators" />
+  <meta property="og:description" content="Step-by-step: how $TMPT enables instant, zero-chargeback payments for creators and platforms on Solana with 0.1–0.5% fees." />
+  <meta property="og:image" content="https://tempttoken.com/social-preview.png" />
+  <meta property="og:url" content="https://tempttoken.com/how-it-works.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://tempttoken.com/how-it-works.html" />
+
+  <!-- Schema: HowTo + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Accept $TMPT Payments as an Adult Creator",
+    "description": "Step-by-step guide for adult content creators to accept TMPT cryptocurrency payments on Solana with zero chargebacks and 0.1% fees.",
+    "url": "https://tempttoken.com/how-it-works.html",
+    "totalTime": "PT10M",
+    "supply": [
+      { "@type": "HowToSupply", "name": "Solana wallet (Phantom or Solflare)" },
+      { "@type": "HowToSupply", "name": "$TMPT token balance or platform integration" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Get a Solana Wallet",
+        "text": "Download Phantom or Solflare wallet. Create a new wallet and save your seed phrase securely offline.",
+        "url": "https://tempttoken.com/how-it-works.html#step-1"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Add Your Wallet to Your Profile",
+        "text": "On supported platforms, add your Solana wallet address to your creator profile. Fans will send TMPT directly to this address.",
+        "url": "https://tempttoken.com/how-it-works.html#step-2"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Receive TMPT Tips & Payments",
+        "text": "Fans purchase TMPT on a DEX (Jupiter/Raydium) and send tips or payments directly to your wallet. Transactions confirm in under 1 second.",
+        "url": "https://tempttoken.com/how-it-works.html#step-3"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Convert to USD (Optional)",
+        "text": "Swap TMPT to USDC on Jupiter, then send USDC to Coinbase or Kraken to withdraw to your bank account.",
+        "url": "https://tempttoken.com/how-it-works.html#step-4"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What blockchain does $TMPT run on?",
+        "acceptedAnswer": { "@type": "Answer", "text": "$TMPT is an SPL token on the Solana blockchain. Solana processes ~65,000 transactions per second with average fees under $0.001 and sub-second finality — ideal for high-volume tipping and micropayments." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the transaction fees?",
+        "acceptedAnswer": { "@type": "Answer", "text": "$TMPT charges a 0.3% protocol fee on transactions, split between liquidity providers, the development treasury, and token burn. Solana network fees add approximately $0.0001. Compare this to credit card processors that charge 5–15% for adult content." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can chargebacks happen with $TMPT?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Blockchain transactions are final and irreversible. Once a fan sends $TMPT to a creator, there is no mechanism for a chargeback. This eliminates the 5–10% chargeback fraud that costs adult creators thousands per month." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is $TMPT anonymous?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Transactions are pseudonymous on-chain — wallet addresses are visible, but not linked to real identities by default. Fans can purchase $TMPT without their real name appearing on a bank statement, making it privacy-friendly for adult content." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I convert $TMPT to USD?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Swap $TMPT to USDC or SOL on Jupiter or Raydium DEX. Then transfer USDC to a centralized exchange like Coinbase, Kraken, or Crypto.com that supports bank withdrawals. The full process typically takes 1–3 business days for fiat to arrive." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to be tech-savvy to use $TMPT?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Installing Phantom wallet takes 2 minutes. Platforms that integrate $TMPT handle the complexity — fans buy and tip in-app, and creators just see the balance in their wallet. No blockchain knowledge required for basic use." }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #a855f7;
+      --pink:   #ec4899;
+      --cyan:   #22d3ee;
+      --dark:   #09090b;
+      --card:   #111114;
+    }
+    body { font-family: 'Space Grotesk', sans-serif; background: var(--dark); color: #fff; }
+
+    .bg-glow {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 700px 500px at 10% 5%, rgba(168,85,247,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 400px at 90% 90%, rgba(236,72,153,0.08) 0%, transparent 70%);
+    }
+
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo { font-weight: 700; font-size: 1.2rem; background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-links { display: flex; gap: 20px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+
+    main { position: relative; z-index: 1; }
+
+    /* ── Hero ── */
+    .hero { text-align: center; padding: 70px 20px 50px; max-width: 780px; margin: 0 auto; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3);
+      padding: 5px 14px; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 600; color: var(--purple); margin-bottom: 24px;
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 18px; }
+    .grad { background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { color: rgba(255,255,255,0.6); font-size: 1.1rem; line-height: 1.65; max-width: 600px; margin: 0 auto; }
+
+    /* ── Sections ── */
+    section { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+
+    h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
+    h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+    p  { color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 14px; }
+    strong { color: #fff; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--purple); margin-bottom: 8px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card); border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 16px; padding: 28px;
+    }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px; }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: grid; grid-template-columns: 64px 1fr;
+      gap: 0 24px; position: relative; padding-bottom: 40px;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-num-col { display: flex; flex-direction: column; align-items: center; }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; flex-shrink: 0;
+    }
+    .step-line {
+      width: 2px; flex: 1; margin-top: 8px;
+      background: linear-gradient(to bottom, rgba(168,85,247,0.4), rgba(168,85,247,0.05));
+    }
+    .step:last-child .step-line { display: none; }
+    .step-body { padding-top: 10px; }
+    .step-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
+    .step-desc { color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 0; font-size: 0.95rem; }
+    .step-tag {
+      display: inline-block; margin-top: 8px;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+    .tag-green  { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+    .tag-purple { background: rgba(168,85,247,0.12); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+    .tag-cyan   { background: rgba(34,211,238,0.12); color: var(--cyan); border: 1px solid rgba(34,211,238,0.2); }
+
+    /* ── Fee comparison table ── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th { text-align: left; padding: 12px 16px; background: rgba(168,85,247,0.08); color: rgba(255,255,255,0.5); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+    td { padding: 13px 16px; border-top: 1px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.75); }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .td-green { color: #4ade80; font-weight: 600; }
+    .td-red   { color: #f87171; }
+    .td-brand { color: var(--purple); font-weight: 700; }
+
+    /* ── Flow diagram ── */
+    .flow { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; overflow-x: auto; padding: 10px 0; }
+    .flow-node {
+      background: var(--card); border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 12px; padding: 16px 20px; text-align: center;
+      min-width: 120px; flex-shrink: 0;
+    }
+    .flow-node .icon { font-size: 1.8rem; margin-bottom: 6px; }
+    .flow-node .label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.8); }
+    .flow-node .sublabel { font-size: 0.7rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+    .flow-arrow { font-size: 1.2rem; color: var(--purple); padding: 0 10px; flex-shrink: 0; }
+
+    /* ── FAQ ── */
+    .faq-item { border-top: 1px solid rgba(255,255,255,0.07); padding: 20px 0; }
+    .faq-q { font-weight: 600; font-size: 1rem; margin-bottom: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-a { color: rgba(255,255,255,0.6); line-height: 1.7; font-size: 0.95rem; }
+
+    /* ── CTA ── */
+    .cta-box {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(168,85,247,0.12) 0%, rgba(236,72,153,0.08) 100%);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px; padding: 50px 30px;
+      margin: 0 auto 60px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      color: #fff; font-family: inherit; font-size: 1.05rem; font-weight: 700;
+      padding: 14px 36px; border-radius: 12px; text-decoration: none;
+      border: none; cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+      margin: 6px;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-block;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.8); font-family: inherit; font-size: 1rem; font-weight: 600;
+      padding: 13px 30px; border-radius: 12px; text-decoration: none;
+      transition: background 0.2s; margin: 6px;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1; text-align: center;
+      padding: 28px 20px; border-top: 1px solid rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.3); font-size: 0.8rem;
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.7); }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 12px; }
+      .flow { gap: 0; }
+      .flow-arrow { padding: 0 6px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="/" class="logo">$TMPT</a>
+  <ul class="nav-links">
+    <li><a href="/waitlist.html" style="color:#ec4899;font-weight:700;">⚡ Waitlist</a></li>
+    <li><a href="/for-platforms.html">Platforms</a></li>
+    <li><a href="/creators.html">Creators</a></li>
+    <li><a href="/faq.html">FAQ</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="badge">📖 How It Works</div>
+  <h1>Payments Built for<br /><span class="grad">Adult Creators</span></h1>
+  <p class="hero-sub">
+    $TMPT is a Solana-based token that lets fans tip and pay creators directly —
+    with 0.1–0.5% fees, zero chargebacks, and instant settlement anywhere in the world.
+  </p>
+</div>
+
+<!-- Transaction Flow -->
+<section>
+  <div class="section-label">The Flow</div>
+  <h2>From Fan to Creator in &lt;1 Second</h2>
+  <p>Here's the complete payment journey, from a fan deciding to tip to a creator seeing funds in their wallet.</p>
+
+  <div class="flow" style="margin: 32px 0;">
+    <div class="flow-node">
+      <div class="icon">😍</div>
+      <div class="label">Fan</div>
+      <div class="sublabel">Wants to tip</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="icon">🛒</div>
+      <div class="label">Buy $TMPT</div>
+      <div class="sublabel">Jupiter / in-app</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="icon">⚡</div>
+      <div class="label">Solana TX</div>
+      <div class="sublabel">&lt;1 sec, ~$0.0001</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node" style="border-color:rgba(168,85,247,0.5);background:rgba(168,85,247,0.08);">
+      <div class="icon">🎭</div>
+      <div class="label">Creator</div>
+      <div class="sublabel">Receives TMPT</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="icon">💵</div>
+      <div class="label">Cash Out</div>
+      <div class="sublabel">Swap → USD</div>
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem;color:rgba(255,255,255,0.4);text-align:center;margin-top:-10px;">
+    No banks. No payment processors. No chargebacks. No frozen accounts.
+  </p>
+</section>
+
+<!-- Step by Step -->
+<section id="step-1">
+  <div class="section-label">Creator Guide</div>
+  <h2>Step-by-Step: Getting Set Up</h2>
+  <p style="margin-bottom:32px;">Everything you need to start accepting $TMPT in under 10 minutes.</p>
+
+  <div class="steps">
+    <div class="step" id="step-1">
+      <div class="step-num-col">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Get a Solana Wallet</div>
+        <p class="step-desc">
+          Download <strong>Phantom</strong> (phantom.app) or <strong>Solflare</strong> (solflare.com) — both are free, mobile + desktop.
+          Create a new wallet and write your 12-word seed phrase on paper. Store it offline. Never share it.
+          Your wallet address looks like: <code style="color:var(--cyan);font-size:0.85rem;">7xKX...mPqT</code>
+        </p>
+        <span class="step-tag tag-green">⏱ 2 minutes</span>
+      </div>
+    </div>
+
+    <div class="step" id="step-2">
+      <div class="step-num-col">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Add Your Wallet to Your Profile</div>
+        <p class="step-desc">
+          On any platform that supports $TMPT, go to your payment settings and paste your Solana wallet address.
+          Fans will send TMPT directly to that address — no middleman, no hold periods.
+          If your platform doesn't support $TMPT yet, share your wallet address in your bio and link to
+          <a href="/for-platforms.html" style="color:var(--purple);">our platform integration guide</a>.
+        </p>
+        <span class="step-tag tag-purple">Platform-dependent</span>
+      </div>
+    </div>
+
+    <div class="step" id="step-3">
+      <div class="step-num-col">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Receive Tips &amp; Payments</div>
+        <p class="step-desc">
+          When a fan tips you, the TMPT lands in your wallet in under a second. You'll see it immediately
+          in Phantom or Solflare. Transactions are final — <strong>no chargebacks, ever</strong>.
+          You can receive from anyone in the world, at any hour, including countries where adult platforms are
+          typically blocked by payment processors.
+        </p>
+        <span class="step-tag tag-green">✅ Instant &amp; final</span>
+      </div>
+    </div>
+
+    <div class="step" id="step-4">
+      <div class="step-num-col">
+        <div class="step-num">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Convert to USD (Optional)</div>
+        <p class="step-desc">
+          Want cash? Open <a href="https://jup.ag" target="_blank" rel="noopener" style="color:var(--purple);">Jupiter</a> 
+          (jup.ag) and swap $TMPT → USDC in one click. Then send your USDC to <strong>Coinbase</strong>, 
+          <strong>Kraken</strong>, or <strong>Crypto.com</strong> and withdraw to your bank account.
+          Typical time: 1–3 business days for fiat to land.
+          Or — just hold TMPT and spend it directly with merchants who accept it.
+        </p>
+        <span class="step-tag tag-cyan">⚡ Optional — hold or convert</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fee Comparison -->
+<section>
+  <div class="section-label">Real Numbers</div>
+  <h2>What You Actually Keep</h2>
+  <p>On a <strong>$10,000/month</strong> creator income, here's what each payment method takes from you:</p>
+
+  <div class="card" style="margin-top:24px;padding:0;overflow:hidden;">
+    <table>
+      <thead>
+        <tr>
+          <th>Payment Method</th>
+          <th>Fee Rate</th>
+          <th>Chargebacks</th>
+          <th>You Keep</th>
+          <th>Annual Loss</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Credit Card (OnlyFans)</strong></td>
+          <td class="td-red">20% platform + fees</td>
+          <td class="td-red">Yes (5–10%)</td>
+          <td class="td-red">~$7,000</td>
+          <td class="td-red">−$36,000</td>
+        </tr>
+        <tr>
+          <td><strong>PayPal / Stripe (if allowed)</strong></td>
+          <td class="td-red">3–15%</td>
+          <td class="td-red">Yes</td>
+          <td class="td-red">~$8,500</td>
+          <td class="td-red">−$18,000</td>
+        </tr>
+        <tr>
+          <td><strong>Cam Site (standard)</strong></td>
+          <td class="td-red">30–50% platform cut</td>
+          <td class="td-red">Yes</td>
+          <td class="td-red">~$6,000</td>
+          <td class="td-red">−$48,000</td>
+        </tr>
+        <tr style="background:rgba(168,85,247,0.06);">
+          <td class="td-brand"><strong>$TMPT (direct)</strong></td>
+          <td class="td-green">0.3%</td>
+          <td class="td-green">Never</td>
+          <td class="td-green">$9,970</td>
+          <td class="td-green">−$360/yr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.8rem;color:rgba(255,255,255,0.3);margin-top:10px;">
+    *Estimates. Platform fees vary. Chargeback rates from industry reports.
+    $TMPT figures assume direct wallet payment; platform integration fees may vary.
+  </p>
+</section>
+
+<!-- Technical Details -->
+<section>
+  <div class="section-label">Under the Hood</div>
+  <h2>How $TMPT Is Built</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>⛓ Solana Blockchain</h3>
+      <p style="margin-bottom:0;">
+        $TMPT is an <strong>SPL token</strong> on Solana — the same standard as USDC, Bonk, and JitoSOL.
+        Solana processes 65,000+ TPS with 400ms block times and fees averaging $0.0001 per transaction.
+        Perfect for high-frequency tipping.
+      </p>
+    </div>
+    <div class="card">
+      <h3>🔥 Deflationary Mechanics</h3>
+      <p style="margin-bottom:0;">
+        <strong>0.1% of every transaction is burned</strong> — permanently removed from supply.
+        As usage grows, supply shrinks. This creates long-term deflationary pressure that benefits holders.
+        Burn is automatic, on-chain, and verifiable.
+      </p>
+    </div>
+    <div class="card">
+      <h3>🏛 Governance</h3>
+      <p style="margin-bottom:0;">
+        $TMPT holders vote on protocol changes: fee rates, treasury spending, new feature priorities.
+        Each token = one vote. Proposals go on-chain. No centralized decision-making.
+        Early holders get extra governance weight.
+      </p>
+    </div>
+    <div class="card">
+      <h3>💧 Liquidity</h3>
+      <p style="margin-bottom:0;">
+        $TMPT trades on <strong>Jupiter and Raydium</strong> DEXes — the largest liquidity venues on Solana.
+        Fans can buy with SOL, USDC, or other Solana tokens in one swap.
+        Liquidity providers earn a share of protocol fees.
+      </p>
+    </div>
+    <div class="card">
+      <h3>🔒 Security</h3>
+      <p style="margin-bottom:0;">
+        Smart contract is immutable post-audit. No admin keys. No freeze authority after launch.
+        Mint authority revoked at launch — maximum supply is fixed forever.
+        Contract audit planned with a reputable Solana security firm.
+      </p>
+    </div>
+    <div class="card">
+      <h3>🌐 API for Platforms</h3>
+      <p style="margin-bottom:0;">
+        Platforms integrate $TMPT via a simple REST API — create payment buttons, track tips, handle
+        in-app purchases. <a href="/for-platforms.html#api" style="color:var(--purple);">Read the integration docs →</a>
+        Webhook support for real-time payment events.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Token Economics -->
+<section>
+  <div class="section-label">Tokenomics</div>
+  <h2>$TMPT Token Distribution</h2>
+  <p>Fixed supply at launch. No unlimited minting. No inflation.</p>
+
+  <div class="card" style="margin-top:20px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+      <div style="text-align:center;padding:16px;background:rgba(168,85,247,0.08);border-radius:12px;">
+        <div style="font-size:1.8rem;font-weight:700;color:var(--purple);">40%</div>
+        <div style="font-weight:600;margin-top:4px;">Public Sale</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:4px;">Available on DEX at launch</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(236,72,153,0.08);border-radius:12px;">
+        <div style="font-size:1.8rem;font-weight:700;color:var(--pink);">25%</div>
+        <div style="font-weight:600;margin-top:4px;">Liquidity Pool</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:4px;">Locked for DEX liquidity</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(34,211,238,0.08);border-radius:12px;">
+        <div style="font-size:1.8rem;font-weight:700;color:var(--cyan);">20%</div>
+        <div style="font-weight:600;margin-top:4px;">Community Treasury</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:4px;">Governed by holders; creator incentives</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(251,191,36,0.08);border-radius:12px;">
+        <div style="font-size:1.8rem;font-weight:700;color:#fbbf24;">10%</div>
+        <div style="font-weight:600;margin-top:4px;">Team &amp; Dev</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:4px;">24-month vesting, 6-month cliff</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(74,222,128,0.08);border-radius:12px;">
+        <div style="font-size:1.8rem;font-weight:700;color:#4ade80;">5%</div>
+        <div style="font-weight:600;margin-top:4px;">Early Holders</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:4px;">ETH migration airdrop</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-label">Common Questions</div>
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">What blockchain does $TMPT run on?</div>
+    <div class="faq-a">$TMPT is an SPL token on <strong>Solana</strong>. Solana processes ~65,000 transactions per second with average fees under $0.001 and sub-second finality — making it ideal for high-volume tipping and micropayments.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">What are the transaction fees?</div>
+    <div class="faq-a">$TMPT charges a <strong>0.3% protocol fee</strong> on transactions — split between liquidity providers, the development treasury, and token burn. Solana network fees add approximately $0.0001. Compare that to credit card processors that charge 5–15% for adult content.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Can chargebacks happen with $TMPT?</div>
+    <div class="faq-a"><strong>No.</strong> Blockchain transactions are final and irreversible. Once a fan sends $TMPT to a creator, there is no mechanism for a chargeback. This eliminates the 5–10% chargeback fraud that costs adult creators thousands per month.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is $TMPT anonymous?</div>
+    <div class="faq-a">Transactions are <strong>pseudonymous on-chain</strong> — wallet addresses are visible, but not linked to real identities by default. Fans can purchase $TMPT without their real name appearing on a bank statement, making it privacy-friendly for adult content.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How do I convert $TMPT to USD?</div>
+    <div class="faq-a">Swap $TMPT to USDC or SOL on <a href="https://jup.ag" target="_blank" rel="noopener" style="color:var(--purple);">Jupiter</a> or Raydium DEX. Then transfer USDC to a centralized exchange like Coinbase or Kraken that supports bank withdrawals. Full process: typically 1–3 business days for fiat to arrive.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Do I need to be tech-savvy to use $TMPT?</div>
+    <div class="faq-a">No. Installing Phantom wallet takes 2 minutes. Platforms that integrate $TMPT handle the complexity — fans buy and tip in-app, and creators just see the balance in their wallet. No blockchain knowledge required for basic use.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">When does $TMPT launch?</div>
+    <div class="faq-a">We're targeting <strong>Q1 2026</strong> for Solana deployment. Join the <a href="/waitlist.html" style="color:var(--purple);">waitlist</a> to get notified first and earn bonus tokens.</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="cta-box">
+    <div style="font-size:2.5rem;margin-bottom:16px;">🪙</div>
+    <h2 style="font-size:2rem;margin-bottom:12px;">Ready to Get Started?</h2>
+    <p style="color:rgba(255,255,255,0.6);margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;">
+      Join the waitlist for early access and bonus tokens. Or dive into the integration docs if you run a platform.
+    </p>
+    <div>
+      <a href="/waitlist.html" class="btn-primary">⚡ Join the Waitlist</a>
+      <a href="/for-platforms.html" class="btn-secondary">Platform Docs →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p style="margin-bottom:8px;">
+    <a href="/">Home</a> · <a href="/litepaper.html">Litepaper</a> · <a href="/creators.html">Creators</a> · <a href="/for-platforms.html">Platforms</a> · <a href="/faq.html">FAQ</a> · <a href="/blog.html">Blog</a>
+  </p>
+  <p>$TMPT is a utility token, not a security. Not financial advice. 18+ only.</p>
+  <p style="margin-top:6px;">© 2026 TEMPT Token · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></p>
+</footer>
+
+</body>
+</html>

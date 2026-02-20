@@ -394,6 +394,46 @@
             color: #ffcccc;
         }
 
+        /* ── Hamburger ── */
+        .hamburger {
+            display: none;
+            flex-direction: column; justify-content: space-between;
+            width: 28px; height: 20px;
+            cursor: pointer; background: none; border: none; padding: 0;
+        }
+        .hamburger span {
+            display: block; height: 2px; width: 100%;
+            background: #fff; border-radius: 2px;
+            transition: transform 0.25s, opacity 0.25s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        /* ── Mobile nav overlay ── */
+        .mobile-nav {
+            display: none;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 999;
+            background: rgba(9,9,11,0.98);
+            padding: 80px 30px 30px;
+            flex-direction: column; gap: 6px;
+            overflow-y: auto;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            display: block; padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.8); text-decoration: none;
+            font-size: 1.15rem; font-weight: 500;
+            transition: color 0.2s;
+        }
+        .mobile-nav a:hover { color: #fff; }
+        .mobile-nav .close-btn {
+            position: absolute; top: 22px; right: 24px;
+            background: none; border: none; color: #fff;
+            font-size: 1.8rem; cursor: pointer; line-height: 1;
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -411,6 +451,10 @@
                 display: none;
             }
 
+            .hamburger {
+                display: flex;
+            }
+
             .comparison-row {
                 grid-template-columns: 1.5fr 1fr 1fr;
                 font-size: 0.9rem;
@@ -419,6 +463,23 @@
     </style>
 </head>
 <body>
+    <!-- Mobile nav overlay -->
+    <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile menu">
+        <button class="close-btn" onclick="closeMobileNav()" aria-label="Close menu">✕</button>
+        <a href="/waitlist.html" style="color:#ec4899;font-weight:700;">⚡ Join Waitlist</a>
+        <a href="/">Home</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/for-platforms.html">For Platforms</a>
+        <a href="/creators.html">For Creators</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/launch.html" style="color:#a78bfa;font-weight:700;">🚀 Launch Countdown</a>
+        <a href="/litepaper.html">Litepaper</a>
+        <a href="/migrate.html">ETH Migration</a>
+        <a href="/terms.html" style="color:rgba(255,255,255,0.4);font-size:0.9rem;">Terms</a>
+        <a href="/privacy.html" style="color:rgba(255,255,255,0.4);font-size:0.9rem;">Privacy</a>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -436,9 +497,10 @@
                     <li><a href="/faq.html">FAQ</a></li>
                     <li><a href="/waitlist.html" style="color: #ec4899; font-weight: 700;">⚡ Waitlist</a></li>
                     <li><a href="/launch.html" style="color: #a78bfa; font-weight: 700;">🚀 Launch</a></li>
-                    <li><a href="/privacy.html">Privacy</a></li>
-                    <li><a href="/terms.html">Terms</a></li>
                 </ul>
+                <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
             </nav>
         </div>
     </header>
@@ -647,9 +709,9 @@
                 <div class="footer-section">
                     <h4>For Users</h4>
                     <a href="/launch.html">🚀 Launch Countdown</a>
-                    <a href="#use-cases">Use Cases</a>
-                    <a href="#comparison">Why $TMPT</a>
+                    <a href="/how-it-works.html">How It Works</a>
                     <a href="/creators.html">For Creators</a>
+                    <a href="/waitlist.html">⚡ Waitlist</a>
                     <a href="/faq.html">FAQ</a>
                 </div>
 
@@ -837,6 +899,24 @@
                 closeLaunchModal();
             }
         });
+    </script>
+    <script>
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            const btn = document.getElementById('hamburgerBtn');
+            const isOpen = nav.classList.toggle('open');
+            btn.classList.toggle('open', isOpen);
+            btn.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('open');
+            document.getElementById('hamburgerBtn').classList.remove('open');
+            document.getElementById('hamburgerBtn').setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+        // Close on ESC
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
     </script>
 </body>
 </html>

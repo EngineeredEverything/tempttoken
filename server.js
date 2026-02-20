@@ -17,12 +17,14 @@ const MIGRATIONS_FILE = path.join(DATA_DIR, 'migrations.json');
 const ADMIN_KEY = process.env.TEMPT_ADMIN_KEY || 'tempt-admin-2026';
 
 const ANALYTICS_FILE = path.join(DATA_DIR, 'analytics.json');
+const WAITLIST_FILE  = path.join(DATA_DIR, 'waitlist.json');
 
 // Ensure data directory and files exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(SUBSCRIBERS_FILE)) fs.writeFileSync(SUBSCRIBERS_FILE, JSON.stringify({ subscribers: [] }, null, 2));
 if (!fs.existsSync(MIGRATIONS_FILE)) fs.writeFileSync(MIGRATIONS_FILE, JSON.stringify({ registrations: [] }, null, 2));
 if (!fs.existsSync(ANALYTICS_FILE)) fs.writeFileSync(ANALYTICS_FILE, JSON.stringify({ pageviews: [] }, null, 2));
+if (!fs.existsSync(WAITLIST_FILE))  fs.writeFileSync(WAITLIST_FILE,  JSON.stringify({ members: [] }, null, 2));
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -309,16 +311,139 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
+  // ── POST /api/waitlist ────────────────────────────────────────────────────
+  if (req.method === 'POST' && pathname === '/api/waitlist') {
+    try {
+      const body = await parseBody(req);
+      const email    = (body.email || '').trim().toLowerCase();
+      const name     = (body.name  || '').trim().substring(0, 100);
+      const refCode  = (body.ref   || '').trim().substring(0, 20).toUpperCase() || null;
+
+      if (!email || !isValidEmail(email))
+        return json(res, 400, { success: false, message: 'Invalid email address.' });
+
+      const data = loadJSON(WAITLIST_FILE);
+      if (!data.members) data.members = [];
+
+      const existing = data.members.find(m => m.email === email);
+      if (existing) {
+        return json(res, 200, {
+          success: true,
+          message: 'Already on the waitlist!',
+          duplicate: true,
+          position: data.members.findIndex(m => m.email === email) + 1,
+          refCode: existing.refCode,
+          referrals: existing.referrals || 0,
+        });
+      }
+
+      // Generate unique referral code
+      const code = crypto.randomBytes(4).toString('hex').toUpperCase();
+
+      // Credit referrer if valid
+      if (refCode) {
+        const referrer = data.members.find(m => m.refCode === refCode);
+        if (referrer) {
+          referrer.referrals = (referrer.referrals || 0) + 1;
+          referrer.updatedAt = new Date().toISOString();
+        }
+      }
+
+      const member = {
+        id: crypto.randomBytes(8).toString('hex'),
+        email, name: name || null,
+        refCode: code,
+        referredBy: refCode || null,
+        referrals: 0,
+        joinedAt: new Date().toISOString(),
+        ip: getIP(req),
+      };
+
+      data.members.push(member);
+      saveJSON(WAITLIST_FILE, data);
+
+      const position = data.members.length;
+      console.log(`[waitlist] ${email} → #${position} (ref: ${refCode || 'none'})`);
+      return json(res, 200, {
+        success: true,
+        message: `You're #${position} on the waitlist!`,
+        position,
+        refCode: code,
+        referrals: 0,
+        total: data.members.length,
+      });
+
+    } catch (err) {
+      console.error('Waitlist error:', err);
+      return json(res, 500, { success: false, message: 'Server error. Please try again.' });
+    }
+  }
+
+  // ── GET /api/waitlist/position ────────────────────────────────────────────
+  if (req.method === 'GET' && pathname === '/api/waitlist/position') {
+    const email = (url.searchParams.get('email') || '').trim().toLowerCase();
+    if (!email || !isValidEmail(email))
+      return json(res, 400, { success: false, message: 'Invalid email.' });
+
+    const data = loadJSON(WAITLIST_FILE);
+    const idx  = (data.members || []).findIndex(m => m.email === email);
+    if (idx === -1)
+      return json(res, 404, { success: false, message: 'Not found on waitlist.' });
+
+    const member = data.members[idx];
+    return json(res, 200, {
+      success: true,
+      position: idx + 1,
+      total: data.members.length,
+      refCode: member.refCode,
+      referrals: member.referrals || 0,
+    });
+  }
+
+  // ── GET /api/waitlist/stats ───────────────────────────────────────────────
+  if (req.method === 'GET' && pathname === '/api/waitlist/stats') {
+    const data = loadJSON(WAITLIST_FILE);
+    const members = data.members || [];
+    const topReferrers = members
+      .filter(m => (m.referrals || 0) > 0)
+      .sort((a, b) => b.referrals - a.referrals)
+      .slice(0, 10)
+      .map(m => ({ name: m.name || m.email.split('@')[0], referrals: m.referrals }));
+
+    return json(res, 200, {
+      success: true,
+      total: members.length,
+      topReferrers,
+    });
+  }
+
+  // ── Admin: GET /api/admin/waitlist ────────────────────────────────────────
+  if (req.method === 'GET' && pathname === '/api/admin/waitlist') {
+    const adminKey = req.headers['x-admin-key'] || url.searchParams.get('key');
+    if (adminKey !== ADMIN_KEY) return json(res, 401, { success: false, message: 'Unauthorized' });
+
+    const data = loadJSON(WAITLIST_FILE);
+    const members = data.members || [];
+    return json(res, 200, {
+      success: true,
+      count: members.length,
+      totalReferrals: members.reduce((sum, m) => sum + (m.referrals || 0), 0),
+      members,
+    });
+  }
+
   // ── Health check ──────────────────────────────────────────────────────────
   if (pathname === '/api/health') {
     const subs = loadJSON(SUBSCRIBERS_FILE);
     const migs = loadJSON(MIGRATIONS_FILE);
     const anl  = loadJSON(ANALYTICS_FILE);
+    const wl   = loadJSON(WAITLIST_FILE);
     return json(res, 200, {
       status: 'ok',
       subscribers: (subs.subscribers || []).length,
       migrations:  (migs.registrations || []).length,
       pageviews:   (anl.pageviews || []).length,
+      waitlist:    (wl.members || []).length,
       ts: new Date().toISOString(),
     });
   }

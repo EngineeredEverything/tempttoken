@@ -93,6 +93,9 @@
                 <button class="tab-btn" id="tabAnalytics" onclick="switchTab('analytics')">
                     📊 Analytics
                 </button>
+                <button class="tab-btn" id="tabWaitlist" onclick="switchTab('waitlist')">
+                    ⚡ Waitlist
+                </button>
             </div>
 
             <!-- ── Subscribers Tab ───────────────────────────────────────── -->
@@ -169,6 +172,29 @@
                 </div>
             </div>
 
+            <!-- ── Waitlist Tab ───────────────────────────────────────────── -->
+            <div id="panelWaitlist" class="hidden">
+                <div class="card p-5 mb-5">
+                    <div class="grid grid-cols-2 gap-4 mb-5" id="wlStats" style="display:grid!important">
+                        <div class="bg-gray-900 rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-purple-400" id="wlTotal">—</div>
+                            <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Total Members</div>
+                        </div>
+                        <div class="bg-gray-900 rounded-xl p-4 text-center">
+                            <div class="text-3xl font-bold text-pink-400" id="wlTotalRefs">—</div>
+                            <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Total Referrals</div>
+                        </div>
+                    </div>
+                    <button onclick="exportWlCSV()" class="bg-purple-700 hover:bg-purple-600 px-5 py-2 rounded-lg text-sm font-semibold transition">📥 Export CSV</button>
+                </div>
+                <div class="card p-5">
+                    <h3 class="font-bold mb-4 text-sm text-gray-400 uppercase tracking-wider">Waitlist Members</h3>
+                    <div id="wlRows" class="space-y-3">
+                        <p class="text-gray-500 text-sm">Loading…</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- ── Migrations Tab ────────────────────────────────────────── -->
             <div id="panelMigs" class="hidden">
                 <!-- Actions -->
@@ -215,11 +241,12 @@
 
         // ── Tabs ─────────────────────────────────────────────────────────
         function switchTab(tab) {
-            ['subs','migs','analytics'].forEach(t => {
+            ['subs','migs','analytics','waitlist'].forEach(t => {
                 document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('hidden', tab !== t);
                 document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('active', tab === t);
             });
             if (tab === 'analytics') loadAnalytics(7);
+            if (tab === 'waitlist') loadWaitlist();
         }
 
         // ── Data ─────────────────────────────────────────────────────────
@@ -520,6 +547,59 @@
         setInterval(refreshAll, 60000);
 
         document.getElementById('adminKeyInput').focus();
+
+        // ── Helpers ───────────────────────────────────────────────────────
+        function escHtml(s) {
+            return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        // ── Waitlist ──────────────────────────────────────────────────────
+        async function loadWaitlist() {
+            const r = await fetch(`${API}/admin/waitlist`, { headers: { 'X-Admin-Key': ADMIN_KEY } });
+            if (!r.ok) return;
+            const d = await r.json();
+            if (!d.success) return;
+
+            document.getElementById('wlTotal').textContent     = d.count.toLocaleString();
+            document.getElementById('wlTotalRefs').textContent = d.totalReferrals.toLocaleString();
+
+            const container = document.getElementById('wlRows');
+            if (!d.members || d.members.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-sm">No waitlist members yet.</p>';
+                return;
+            }
+            container.innerHTML = d.members.map((m, i) => `
+                <div class="bg-gray-900 rounded-xl p-4 flex items-center gap-4 flex-wrap">
+                    <span class="text-lg font-bold text-purple-400 w-10 text-center">#${i+1}</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-semibold text-sm">${escHtml(m.name || '—')}</div>
+                        <div class="text-gray-400 text-xs truncate">${escHtml(m.email)}</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-pink-400 font-bold">${m.referrals || 0}</div>
+                        <div class="text-xs text-gray-500">refs</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-cyan-400 font-mono text-xs">${m.refCode}</div>
+                        <div class="text-xs text-gray-500">code</div>
+                    </div>
+                    <div class="text-xs text-gray-500">${new Date(m.joinedAt).toLocaleDateString()}</div>
+                </div>
+            `).join('');
+        }
+
+        function exportWlCSV() {
+            fetch(`${API}/admin/waitlist`, { headers: { 'X-Admin-Key': ADMIN_KEY } })
+                .then(r => r.json())
+                .then(d => {
+                    if (!d.success || !d.members.length) return alert('No waitlist data.');
+                    const rows = [['Position','Name','Email','RefCode','Referrals','ReferredBy','JoinedAt']];
+                    d.members.forEach((m, i) => rows.push([i+1, m.name||'', m.email, m.refCode, m.referrals||0, m.referredBy||'', m.joinedAt]));
+                    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+                    const a = Object.assign(document.createElement('a'), { href: 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv), download: 'tmpt-waitlist.csv' });
+                    a.click();
+                });
+        }
     </script>
 </body>
 </html>

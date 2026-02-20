@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the $TMPT Waitlist — Early Access + Token Bonus</title>
+  <meta name="description" content="Get early access to $TMPT — the crypto payment layer for adult creators. Join the waitlist, refer friends, climb the leaderboard, earn bonus tokens at launch." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Join the $TMPT Waitlist — Earn Bonus Tokens" />
+  <meta property="og:description" content="Be first. Refer friends. Move up the list. Early members get bonus $TMPT at launch." />
+  <meta property="og:image" content="https://tempttoken.com/social-preview.png" />
+  <meta property="og:url" content="https://tempttoken.com/waitlist.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Join the $TMPT Waitlist" />
+  <meta name="twitter:description" content="Be first. Refer friends. Earn bonus tokens at launch." />
+  <meta name="twitter:image" content="https://tempttoken.com/social-preview.png" />
+
+  <link rel="canonical" href="https://tempttoken.com/waitlist.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #a855f7;
+      --pink:   #ec4899;
+      --cyan:   #22d3ee;
+      --dark:   #09090b;
+      --card:   #111114;
+      --border: rgba(168,85,247,0.2);
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background ── */
+    .bg-glow {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 800px 600px at 20% 10%, rgba(168,85,247,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 500px at 80% 80%, rgba(236,72,153,0.10) 0%, transparent 70%);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo { font-weight: 700; font-size: 1.2rem; background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-link:hover { color: #fff; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 80px 20px 60px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(168,85,247,0.15);
+      border: 1px solid rgba(168,85,247,0.3);
+      padding: 6px 16px; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 600; color: var(--purple);
+      margin-bottom: 28px;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    h1 .grad { background: linear-gradient(90deg, var(--purple), var(--pink), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.15rem; line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* ── Counter ── */
+    .counter-strip {
+      display: flex; justify-content: center; gap: 40px;
+      margin: 30px 0 10px;
+    }
+    .counter-item { text-align: center; }
+    .counter-num {
+      font-size: 2.2rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .counter-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      max-width: 520px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    .card h2 { font-size: 1.3rem; margin-bottom: 8px; }
+    .card .sub { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 24px; }
+
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: var(--purple); }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      border: none; border-radius: 12px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      color: #fff; font-family: inherit;
+      font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: opacity 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-note { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-align: center; margin-top: 12px; }
+
+    /* ── Success State ── */
+    #success-state { display: none; }
+
+    .position-badge {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.15));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px;
+      padding: 28px 20px;
+      margin-bottom: 24px;
+    }
+    .position-badge .position-num {
+      font-size: 4rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .position-badge .position-label { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 6px; }
+
+    .ref-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .ref-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .ref-link-row { display: flex; gap: 8px; align-items: center; }
+    .ref-url {
+      flex: 1; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 10px 12px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.8);
+      word-break: break-all; cursor: text;
+    }
+    .btn-copy {
+      padding: 10px 16px;
+      background: rgba(168,85,247,0.2);
+      border: 1px solid rgba(168,85,247,0.4);
+      border-radius: 8px;
+      color: var(--purple);
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: background 0.2s;
+    }
+    .btn-copy:hover { background: rgba(168,85,247,0.35); }
+    .btn-copy.copied { color: #4ade80; border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.1); }
+
+    .share-section { margin-top: 16px; }
+    .share-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-share {
+      flex: 1; min-width: 100px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid;
+      font-family: inherit; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: opacity 0.2s, transform 0.1s; text-align: center;
+      text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn-share:hover { opacity: 0.8; transform: translateY(-1px); }
+    .btn-share.twitter { background: rgba(29,161,242,0.1); border-color: rgba(29,161,242,0.3); color: #1da1f2; }
+    .btn-share.telegram { background: rgba(0,136,204,0.1); border-color: rgba(0,136,204,0.3); color: #0088cc; }
+
+    .ref-count-row {
+      text-align: center;
+      margin-top: 16px;
+      padding: 12px;
+      background: rgba(168,85,247,0.08);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .ref-count-row strong { color: var(--purple); }
+
+    /* ── Perks Section ── */
+    .perks {
+      max-width: 760px; margin: 60px auto;
+      padding: 0 20px;
+      position: relative; z-index: 1;
+    }
+    .perks h2 { text-align: center; font-size: 1.6rem; margin-bottom: 8px; }
+    .perks .perks-sub { text-align: center; color: rgba(255,255,255,0.5); font-size: 0.95rem; margin-bottom: 36px; }
+    .perks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .perk-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .perk-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,0.4); }
+    .perk-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .perk-title { font-weight: 600; margin-bottom: 6px; }
+    .perk-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* ── Leaderboard ── */
+    .leaderboard {
+      max-width: 520px; margin: 0 auto 60px;
+      padding: 0 20px;
+      position: relative; z-index: 1;
+    }
+    .leaderboard h2 { text-align: center; font-size: 1.4rem; margin-bottom: 24px; }
+    .lb-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .lb-header {
+      display: grid; grid-template-columns: 48px 1fr 80px;
+      padding: 12px 20px;
+      background: rgba(168,85,247,0.1);
+      font-size: 0.75rem; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .lb-row {
+      display: grid; grid-template-columns: 48px 1fr 80px;
+      padding: 14px 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      transition: background 0.15s;
+    }
+    .lb-row:hover { background: rgba(255,255,255,0.02); }
+    .lb-rank { font-weight: 700; color: var(--purple); }
+    .lb-rank.top-3 { color: #fbbf24; }
+    .lb-name { color: rgba(255,255,255,0.8); }
+    .lb-refs { text-align: right; font-weight: 600; color: var(--pink); }
+    .lb-empty { text-align: center; padding: 40px; color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem;
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 50px 20px 40px; }
+      .card { padding: 24px 20px; }
+      .counter-strip { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="/" class="logo">$TMPT</a>
+  <a href="/" class="nav-link">← Back to site</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Launching Q1 2026 · Solana
+  </div>
+
+  <h1>Be First.<br /><span class="grad">Earn More.</span></h1>
+
+  <p class="hero-sub">
+    Join the $TMPT early-access waitlist. Refer friends, move up, and earn<br />
+    <strong>bonus tokens</strong> when we launch.
+  </p>
+
+  <div class="counter-strip">
+    <div class="counter-item">
+      <div class="counter-num" id="total-count">—</div>
+      <div class="counter-label">On Waitlist</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-num" id="total-refs">—</div>
+      <div class="counter-label">Referrals Made</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-num">Q1 '26</div>
+      <div class="counter-label">Launch Target</div>
+    </div>
+  </div>
+</section>
+
+<!-- Signup Card -->
+<div class="card" id="signup-card" style="margin-bottom:60px;">
+
+  <!-- Form state -->
+  <div id="form-state">
+    <h2>🚀 Join the Waitlist</h2>
+    <p class="sub">Get early access + bonus $TMPT at launch. No spam, ever.</p>
+
+    <div class="form-group">
+      <label for="wl-name">First Name (optional)</label>
+      <input type="text" id="wl-name" placeholder="e.g. Alex" autocomplete="given-name" />
+    </div>
+    <div class="form-group">
+      <label for="wl-email">Email Address *</label>
+      <input type="email" id="wl-email" placeholder="you@email.com" autocomplete="email" required />
+    </div>
+
+    <button class="btn-primary" id="join-btn" onclick="joinWaitlist()">
+      Get Early Access →
+    </button>
+    <p class="form-note">No credit card. No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <!-- Success state -->
+  <div id="success-state">
+    <div class="position-badge">
+      <div class="position-num" id="your-position">—</div>
+      <div class="position-label">Your Position · <span id="total-positions">—</span> total members</div>
+    </div>
+
+    <div class="ref-box">
+      <div class="ref-label">🔗 Your referral link — share it to move up</div>
+      <div class="ref-link-row">
+        <div class="ref-url" id="ref-url-display">https://tempttoken.com/waitlist.html?ref=...</div>
+        <button class="btn-copy" id="copy-btn" onclick="copyLink()">Copy</button>
+      </div>
+      <div class="ref-count-row">
+        You've referred <strong id="ref-count">0</strong> people · each referral moves you up
+      </div>
+      <div class="share-section">
+        <div class="share-label">Share directly:</div>
+        <div class="share-btns">
+          <a class="btn-share twitter" id="share-twitter" href="#" target="_blank" rel="noopener">
+            𝕏 Twitter
+          </a>
+          <a class="btn-share telegram" id="share-telegram" href="#" target="_blank" rel="noopener">
+            ✈ Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Perks -->
+<section class="perks">
+  <h2>Why Join Early?</h2>
+  <p class="perks-sub">Early members get exclusive perks that won't be available after launch.</p>
+  <div class="perks-grid">
+    <div class="perk-card">
+      <span class="perk-icon">🎁</span>
+      <div class="perk-title">Bonus Tokens</div>
+      <div class="perk-desc">Top 100 on the waitlist receive bonus $TMPT allocated at launch.</div>
+    </div>
+    <div class="perk-card">
+      <span class="perk-icon">⚡</span>
+      <div class="perk-title">First Access</div>
+      <div class="perk-desc">Get token access before public launch. Buy at the earliest price.</div>
+    </div>
+    <div class="perk-card">
+      <span class="perk-icon">🗳️</span>
+      <div class="perk-title">Governance Vote</div>
+      <div class="perk-desc">Early members get weighted governance votes on launch parameters.</div>
+    </div>
+    <div class="perk-card">
+      <span class="perk-icon">📈</span>
+      <div class="perk-title">Refer & Climb</div>
+      <div class="perk-desc">Every referral moves you up the list. Top referrers get special rewards.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Leaderboard -->
+<section class="leaderboard">
+  <h2>🏆 Top Referrers</h2>
+  <div class="lb-card">
+    <div class="lb-header">
+      <span>Rank</span>
+      <span>Member</span>
+      <span style="text-align:right">Refs</span>
+    </div>
+    <div id="lb-rows">
+      <div class="lb-empty">Be the first on the leaderboard! 👆</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p style="margin-bottom:8px">
+    <a href="/">Home</a> · <a href="/litepaper.html">Litepaper</a> · <a href="/faq.html">FAQ</a> · <a href="/blog.html">Blog</a>
+  </p>
+  <p>$TMPT is a utility token, not a security. Not financial advice. 18+ only.</p>
+  <p style="margin-top:6px">© 2026 TEMPT Token · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></p>
+</footer>
+
+<script>
+  const API = 'https://tempttoken.com/api';
+  let myRefCode = null;
+  let myRefUrl  = null;
+
+  // ── Parse ref from URL ──────────────────────────────────────────────────
+  const urlParams = new URLSearchParams(window.location.search);
+  const incomingRef = urlParams.get('ref') || null;
+
+  // ── Load public stats ───────────────────────────────────────────────────
+  async function loadStats() {
+    try {
+      const r = await fetch(`${API}/waitlist/stats`);
+      const d = await r.json();
+      if (d.success) {
+        document.getElementById('total-count').textContent = d.total.toLocaleString();
+        const totalRefs = d.topReferrers.reduce((s, m) => s + m.referrals, 0);
+        document.getElementById('total-refs').textContent = totalRefs > 0 ? totalRefs.toLocaleString() : '0';
+        renderLeaderboard(d.topReferrers);
+      }
+    } catch {}
+  }
+
+  // ── Render leaderboard ──────────────────────────────────────────────────
+  function renderLeaderboard(members) {
+    const el = document.getElementById('lb-rows');
+    if (!members || members.length === 0) {
+      el.innerHTML = '<div class="lb-empty">Be the first on the leaderboard! 👆</div>';
+      return;
+    }
+    el.innerHTML = members.map((m, i) => `
+      <div class="lb-row">
+        <span class="lb-rank ${i < 3 ? 'top-3' : ''}">
+          ${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i+1}`}
+        </span>
+        <span class="lb-name">${escHtml(m.name)}</span>
+        <span class="lb-refs">${m.referrals} refs</span>
+      </div>
+    `).join('');
+  }
+
+  // ── Join waitlist ───────────────────────────────────────────────────────
+  async function joinWaitlist() {
+    const email = document.getElementById('wl-email').value.trim();
+    const name  = document.getElementById('wl-name').value.trim();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    const btn = document.getElementById('join-btn');
+    btn.disabled = true;
+    btn.textContent = 'Joining…';
+
+    try {
+      const r = await fetch(`${API}/waitlist`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name, ref: incomingRef }),
+      });
+      const d = await r.json();
+
+      if (d.success) {
+        showSuccess(d.position, d.total, d.refCode, d.referrals || 0);
+        loadStats(); // refresh counters
+      } else {
+        alert(d.message || 'Something went wrong. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Get Early Access →';
+      }
+    } catch {
+      alert('Network error. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Get Early Access →';
+    }
+  }
+
+  // ── Show success state ──────────────────────────────────────────────────
+  function showSuccess(position, total, refCode, referrals) {
+    myRefCode = refCode;
+    myRefUrl  = `https://tempttoken.com/waitlist.html?ref=${refCode}`;
+
+    document.getElementById('form-state').style.display = 'none';
+    document.getElementById('success-state').style.display = 'block';
+
+    document.getElementById('your-position').textContent  = `#${position}`;
+    document.getElementById('total-positions').textContent = `${total.toLocaleString()}`;
+    document.getElementById('ref-url-display').textContent = myRefUrl;
+    document.getElementById('ref-count').textContent       = referrals;
+
+    // Share links
+    const tweetText = encodeURIComponent(
+      `I just joined the $TMPT waitlist — the crypto payment layer for creators 🪙\n\nBe early. Earn bonus tokens. Join via my link:`
+    );
+    document.getElementById('share-twitter').href =
+      `https://twitter.com/intent/tweet?text=${tweetText}&url=${encodeURIComponent(myRefUrl)}`;
+
+    const tgText = encodeURIComponent(
+      `Join the $TMPT early-access waitlist — crypto payments for creators 🪙\nEarly members earn bonus tokens at launch:\n${myRefUrl}`
+    );
+    document.getElementById('share-telegram').href =
+      `https://t.me/share/url?url=${encodeURIComponent(myRefUrl)}&text=${tgText}`;
+
+    // Save to localStorage so returning visitors see their spot
+    localStorage.setItem('tmpt_wl_ref', refCode);
+    localStorage.setItem('tmpt_wl_pos', position);
+  }
+
+  // ── Copy link ───────────────────────────────────────────────────────────
+  function copyLink() {
+    if (!myRefUrl) return;
+    navigator.clipboard.writeText(myRefUrl).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      const el = document.getElementById('ref-url-display');
+      el.select?.();
+      document.execCommand('copy');
+    });
+  }
+
+  // ── Allow enter key to submit ───────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('wl-email').addEventListener('keydown', e => {
+      if (e.key === 'Enter') joinWaitlist();
+    });
+
+    // Restore session if returning visitor
+    const savedRef = localStorage.getItem('tmpt_wl_ref');
+    const savedPos = localStorage.getItem('tmpt_wl_pos');
+    if (savedRef && savedPos) {
+      showSuccess(parseInt(savedPos), '?', savedRef, 0);
+    }
+
+    loadStats();
+  });
+
+  // ── Helpers ─────────────────────────────────────────────────────────────
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+</body>
+</html>
